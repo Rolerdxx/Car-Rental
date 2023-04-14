@@ -4,6 +4,7 @@ from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QDialog, QApplication
 import pyqtcss
 import mysql.connector
+import bcrypt
 
 db = mysql.connector.connect(
     host="localhost",
@@ -58,14 +59,18 @@ class MainWindow(QDialog):
             email = logdialog.getEmail()
             password = logdialog.getPassword()
             mycursor = db.cursor()
-            query = "SELECT * FROM userr WHERE email='"+email+"' and passwordEn='"+password+"'"
+            query = "SELECT * FROM userr WHERE email='"+email+"'"
             mycursor.execute(query)
-            user = mycursor.fetchall()
+            user = mycursor.fetchone()
             if user:
-                currentuser=user
-                self.loginbutton.move(1500,1500)
-                txt = "Good Morning "+user[0][1]+" "+user[0][2]
+                #password = password.encode('utf-8')
+                #if bcrypt.checkpw(password, bytes(user[4])):
+                currentuser = user
+                self.loginbutton.move(1500, 1500)
+                txt = "Good Morning " + user[1] + " " + user[2]
                 self.label.setText(txt)
+                #else:
+                    #msgbox("Login", "Password Incorrect")
             else:
                 msgbox("Login","Cannot login")
 
@@ -74,6 +79,7 @@ class LoginDialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
         loadUi("login_D.ui",self)
+        self.passline.setEchoMode(QtWidgets.QLineEdit.Password)
 
     def getEmail(self):
         return self.emailline.text()
