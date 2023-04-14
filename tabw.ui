@@ -22,19 +22,48 @@
      <height>331</height>
     </rect>
    </property>
+   <property name="selectionMode">
+    <enum>QAbstractItemView::SingleSelection</enum>
+   </property>
+   <property name="selectionBehavior">
+    <enum>QAbstractItemView::SelectRows</enum>
+   </property>
+   <attribute name="horizontalHeaderCascadingSectionResizes">
+    <bool>false</bool>
+   </attribute>
    <column>
     <property name="text">
-     <string>name</string>
+     <string>marque</string>
     </property>
    </column>
    <column>
     <property name="text">
-     <string>age</string>
+     <string>modele</string>
     </property>
    </column>
    <column>
     <property name="text">
-     <string>adresse</string>
+     <string>carburant</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>places</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>transmission</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Prix Par Jour</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>State</string>
     </property>
    </column>
   </widget>
@@ -59,6 +88,40 @@
      <width>261</width>
      <height>31</height>
     </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="loginbutton">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>80</y>
+     <width>91</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Login</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>520</x>
+     <y>30</y>
+     <width>311</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Segoe UI Variable Display Semib</family>
+     <pointsize>18</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Good Morning Guest!</string>
    </property>
   </widget>
  </widget>

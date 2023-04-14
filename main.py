@@ -3,7 +3,16 @@ from PyQt5.uic import loadUi
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QDialog, QApplication
 import pyqtcss
+import mysql.connector
 
+db = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="root",
+    database="carrental"
+)
+
+currentuser = "Guest"
 
 class MainWindow(QDialog):
     def __init__(self):
@@ -14,23 +23,88 @@ class MainWindow(QDialog):
         self.tableWidget.setColumnWidth(2,350)
         self.loaddata()
         self.pushButton.clicked.connect(self.click)
+        self.loginbutton.clicked.connect(self.login)
+
 
     def loaddata(self):
-        people=[{"name":"John","age":45,"address":"New York"}, {"name":"Mark", "age":40,"address":"LA"},
-                {"name":"George","age":30,"address":"London"}]
+        mycursor = db.cursor()
+        mycursor.execute("SELECT * FROM voiture")
+        cars = mycursor.fetchall()
         row = 0
-        self.tableWidget.setRowCount(len(people))
-        for person in people:
-            self.tableWidget.setItem(row, 0, QtWidgets.QTableWidgetItem(person["name"]))
-            self.tableWidget.setItem(row, 1, QtWidgets.QTableWidgetItem(str(person["age"])))
-            self.tableWidget.setItem(row, 2, QtWidgets.QTableWidgetItem(person["address"]))
+        self.tableWidget.setRowCount(len(cars))
+        for car in cars:
+            print(car)
+            print(car[8])
+            self.tableWidget.setItem(row, 0, QtWidgets.QTableWidgetItem(car[1]))
+            self.tableWidget.setItem(row, 1, QtWidgets.QTableWidgetItem(car[2]))
+            self.tableWidget.setItem(row, 2, QtWidgets.QTableWidgetItem(car[4]))
+            self.tableWidget.setItem(row, 3, QtWidgets.QTableWidgetItem(str(car[5])))
+            self.tableWidget.setItem(row, 4, QtWidgets.QTableWidgetItem(car[6]))
+            self.tableWidget.setItem(row, 5, QtWidgets.QTableWidgetItem(car[7]))
+            self.tableWidget.setItem(row, 6, QtWidgets.QTableWidgetItem(str(car[8])))
             row = row + 1
     def click(self):
-        print("woo")
+        mycursor = db.cursor()
+        mycursor.execute("SELECT * FROM userr")
+        users = mycursor.fetchall()
+        for user in users:
+            print(user)
+
+    def login(self):
+        logdialog = LoginDialog(self)
+        logdialog.setStyleSheet(stylesheet2)
+        response = logdialog.exec()
+        if response:
+            email = logdialog.getEmail()
+            password = logdialog.getPassword()
+            mycursor = db.cursor()
+            query = "SELECT * FROM userr WHERE email='"+email+"' and passwordEn='"+password+"'"
+            mycursor.execute(query)
+            user = mycursor.fetchall()
+            if user:
+                currentuser=user
+                self.loginbutton.move(1500,1500)
+                txt = "Good Morning "+user[0][1]+" "+user[0][2]
+                self.label.setText(txt)
+            else:
+                msgbox("Login","Cannot login")
+
+
+class LoginDialog(QDialog):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        loadUi("login_D.ui",self)
+
+    def getEmail(self):
+        return self.emailline.text()
+
+    def getPassword(self):
+        return self.passline.text()
+
+def msgbox(title,message):
+    msgBox = QtWidgets.QMessageBox()
+    msgBox.setIcon(QtWidgets.QMessageBox.Information)
+    msgBox.setText(message)
+    msgBox.setWindowTitle(title)
+    msgBox.setStandardButtons(QtWidgets.QMessageBox.Ok | QtWidgets.QMessageBox.Cancel)
+
+    returnValue = msgBox.exec()
+    if returnValue == QtWidgets.QMessageBox.Ok:
+        print('OK clicked')
+
+
+stylesheet2 = """
+        QDialog {
+            background-image: url("./login.jpg"); 
+            background-repeat: no-repeat; 
+            background-position: center;
+        }
+"""
+
 
 stylesheet = """
         MainWindow {
-            background-image: url("D:/mainimage.jpg"); 
+            background-image: url("./mainimage.jpg"); 
             background-repeat: no-repeat; 
             background-position: center;
         }
