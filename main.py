@@ -37,7 +37,7 @@ class MainWindow(QDialog):
             self.tableWidget.insertRow(row_number)
             for column_number, column_data in enumerate(row_data):
                 item = str(column_data);
-                if (column_number == 3):
+                if (column_number == 1):
                     item = self.getImageLabel(column_data)
                     self.tableWidget.setCellWidget(row_number, column_number, item)
                 else:
@@ -56,7 +56,7 @@ class MainWindow(QDialog):
         #     self.tableWidget.setItem(row, 6, QtWidgets.QTableWidgetItem(str(car[8])))
         #     row = row + 1
     def click(self):
-        print("Search!!!!")
+        print("Search!!!!A")
 
     def login(self):
         logdialog = LoginDialog(self)
@@ -81,7 +81,7 @@ class MainWindow(QDialog):
                 else:
                     msgbox("Login", "Password Incorrect")
             else:
-                msgbox("Login","Cannot login")
+                msgbox("Login", "Cannot login")
 
     def getImageLabel(self, image):
         imageLabel = QtWidgets.QLabel(self)
@@ -100,6 +100,7 @@ class LoginDialog(QDialog):
         self.passline.setEchoMode(QtWidgets.QLineEdit.Password)
 
     def getEmail(self):
+        print(self)
         return self.emailline.text()
 
     def getPassword(self):
