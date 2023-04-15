@@ -2,9 +2,11 @@ import sys
 from PyQt5.uic import loadUi
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QDialog, QApplication
+from PyQt5.QtGui import QPixmap
 import pyqtcss
 import mysql.connector
 import bcrypt
+
 
 db = mysql.connector.connect(
     host="localhost",
@@ -31,17 +33,28 @@ class MainWindow(QDialog):
         mycursor = db.cursor()
         mycursor.execute("SELECT * FROM voiture")
         cars = mycursor.fetchall()
-        row = 0
-        self.tableWidget.setRowCount(len(cars))
-        for car in cars:
-            self.tableWidget.setItem(row, 0, QtWidgets.QTableWidgetItem(car[1]))
-            self.tableWidget.setItem(row, 1, QtWidgets.QTableWidgetItem(car[2]))
-            self.tableWidget.setItem(row, 2, QtWidgets.QTableWidgetItem(car[4]))
-            self.tableWidget.setItem(row, 3, QtWidgets.QTableWidgetItem(str(car[5])))
-            self.tableWidget.setItem(row, 4, QtWidgets.QTableWidgetItem(car[6]))
-            self.tableWidget.setItem(row, 5, QtWidgets.QTableWidgetItem(car[7]))
-            self.tableWidget.setItem(row, 6, QtWidgets.QTableWidgetItem(str(car[8])))
-            row = row + 1
+        for row_number, row_data in enumerate(cars):
+            self.tableWidget.insertRow(row_number)
+            for column_number, column_data in enumerate(row_data):
+                item = str(column_data);
+                if (column_number == 3):
+                    item = self.getImageLabel(column_data)
+                    self.tableWidget.setCellWidget(row_number, column_number, item)
+                else:
+                    self.tableWidget.setItem(row_number, column_number, QtWidgets.QTableWidgetItem(item))
+        self.tableWidget.verticalHeader().setDefaultSectionSize(80)
+        # row = 0
+        # self.tableWidget.setRowCount(len(cars))
+        # for car in cars:
+        #     image = self.getImageLabel(car[3])
+        #     self.tableWidget.setItem(row, 0, QtWidgets.QTableWidgetItem(car[1]))
+        #     self.tableWidget.setItem(row, 1, QtWidgets.QTableWidgetItem(image))
+        #     self.tableWidget.setItem(row, 2, QtWidgets.QTableWidgetItem(car[4]))
+        #     self.tableWidget.setItem(row, 3, QtWidgets.QTableWidgetItem(str(car[5])))
+        #     self.tableWidget.setItem(row, 4, QtWidgets.QTableWidgetItem(car[6]))
+        #     self.tableWidget.setItem(row, 5, QtWidgets.QTableWidgetItem(car[7]))
+        #     self.tableWidget.setItem(row, 6, QtWidgets.QTableWidgetItem(str(car[8])))
+        #     row = row + 1
     def click(self):
         print("Search!!!!")
 
@@ -69,6 +82,15 @@ class MainWindow(QDialog):
                     msgbox("Login", "Password Incorrect")
             else:
                 msgbox("Login","Cannot login")
+
+    def getImageLabel(self, image):
+        imageLabel = QtWidgets.QLabel(self)
+        imageLabel.setText("")
+        imageLabel.setScaledContents(True)
+        pixmap = QPixmap()
+        pixmap.loadFromData(image, 'jpg')
+        imageLabel.setPixmap(pixmap)
+        return imageLabel
 
 
 class LoginDialog(QDialog):
