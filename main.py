@@ -19,9 +19,9 @@ class MainWindow(QDialog):
     def __init__(self):
         super(MainWindow, self).__init__()
         loadUi("tabw.ui",self)
-        self.tableWidget.setColumnWidth(0,250)
-        self.tableWidget.setColumnWidth(1,100)
-        self.tableWidget.setColumnWidth(2,350)
+        # self.tableWidget.setColumnWidth(0,250)
+        # self.tableWidget.setColumnWidth(1,100)
+        # self.tableWidget.setColumnWidth(2,350)
         self.loaddata()
         self.pushButton.clicked.connect(self.click)
         self.loginbutton.clicked.connect(self.login)
@@ -34,8 +34,6 @@ class MainWindow(QDialog):
         row = 0
         self.tableWidget.setRowCount(len(cars))
         for car in cars:
-            print(car)
-            print(car[8])
             self.tableWidget.setItem(row, 0, QtWidgets.QTableWidgetItem(car[1]))
             self.tableWidget.setItem(row, 1, QtWidgets.QTableWidgetItem(car[2]))
             self.tableWidget.setItem(row, 2, QtWidgets.QTableWidgetItem(car[4]))
@@ -45,11 +43,7 @@ class MainWindow(QDialog):
             self.tableWidget.setItem(row, 6, QtWidgets.QTableWidgetItem(str(car[8])))
             row = row + 1
     def click(self):
-        mycursor = db.cursor()
-        mycursor.execute("SELECT * FROM userr")
-        users = mycursor.fetchall()
-        for user in users:
-            print(user)
+        print("Search!!!!")
 
     def login(self):
         logdialog = LoginDialog(self)
