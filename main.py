@@ -63,14 +63,16 @@ class MainWindow(QDialog):
             mycursor.execute(query)
             user = mycursor.fetchone()
             if user:
-                #password = password.encode('utf-8')
-                #if bcrypt.checkpw(password, bytes(user[4])):
-                currentuser = user
-                self.loginbutton.move(1500, 1500)
-                txt = "Good Morning " + user[1] + " " + user[2]
-                self.label.setText(txt)
-                #else:
-                    #msgbox("Login", "Password Incorrect")
+                password = password.encode('utf-8')
+                hash = user[4][2:-1]
+                hash = hash.encode('utf-8')
+                if bcrypt.checkpw(password, hash):
+                    currentuser = user
+                    self.loginbutton.move(1500, 1500)
+                    txt = "Good Morning " + user[2] + " " + user[1] + "!"
+                    self.label.setText(txt)
+                else:
+                    msgbox("Login", "Password Incorrect")
             else:
                 msgbox("Login","Cannot login")
 
