@@ -7,7 +7,7 @@ class CarRentalDB:
     db = mysql.connector.connect(
         host="localhost",
         user="root",
-        password="root",
+        password="",
         database="carrental"
     )
 

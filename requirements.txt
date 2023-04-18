@@ -1,4 +1,4 @@
 pyqt5==5.15.9
 mysql-connector-python==8.0.32
 bcrypt==4.0.1
-pyqt5-tools==5.15.9.3.3
+pyqt5-tools==5.15.9.3.3brac
