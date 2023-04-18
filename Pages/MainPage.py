@@ -7,14 +7,6 @@ from Pages.LoginPage import LoginDialog
 from PyQt5.QtGui import QPixmap
 import bcrypt
 
-stylesheet2 = """
-        QDialog {
-            background-image: url("./images/login.jpg"); 
-            background-repeat: no-repeat; 
-            background-position: center;
-        }
-"""
-
 
 class MainWindow(QDialog):
     def __init__(self):
@@ -33,9 +25,14 @@ class MainWindow(QDialog):
             self.tableWidget.insertRow(row_number)
             for column_number, column_data in enumerate(row_data):
                 item = str(column_data)
-                if (column_number == 1):
+                if column_number == 0:
                     item = self.getImageLabel(column_data)
                     self.tableWidget.setCellWidget(row_number, column_number, item)
+                elif column_number == 6:
+                    if item == "1":
+                        self.tableWidget.setItem(row_number, column_number, QtWidgets.QTableWidgetItem("Available"))
+                    else:
+                        self.tableWidget.setItem(row_number, column_number, QtWidgets.QTableWidgetItem("Reserved"))
                 else:
                     self.tableWidget.setItem(row_number, column_number, QtWidgets.QTableWidgetItem(item))
         self.tableWidget.verticalHeader().setDefaultSectionSize(80)
@@ -45,7 +42,8 @@ class MainWindow(QDialog):
 
     def login(self):
         logdialog = LoginDialog(self)
-        logdialog.setStyleSheet(stylesheet2)
+        logdialog.setFixedHeight(400)
+        logdialog.setFixedWidth(711)
         response = logdialog.exec()
         if response:
             email = logdialog.getemail()

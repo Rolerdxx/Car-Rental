@@ -9,7 +9,6 @@ class LoginDialog(QDialog):
         self.passline.setEchoMode(QtWidgets.QLineEdit.Password)
 
     def getemail(self):
-        print(self)
         return self.emailline.text()
 
     def getpassword(self):

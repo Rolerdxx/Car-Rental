@@ -1,6 +1,7 @@
 from PyQt5 import QtWidgets
 
-def msgbox(title,message):
+
+def msgbox(title, message):
     msgBox = QtWidgets.QMessageBox()
     msgBox.setIcon(QtWidgets.QMessageBox.Information)
     msgBox.setText(message)

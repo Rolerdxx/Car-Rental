@@ -13,6 +13,13 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">MainWindow {
+            background-image: url(&quot;./images/mainimage.jpg&quot;); 
+            background-repeat: no-repeat; 
+            background-position: center;
+        }</string>
+  </property>
   <widget class="QTableWidget" name="tableWidget">
    <property name="geometry">
     <rect>
@@ -33,12 +40,12 @@
    </attribute>
    <column>
     <property name="text">
-     <string>marque</string>
+     <string>image</string>
     </property>
    </column>
    <column>
     <property name="text">
-     <string>image</string>
+     <string>marque</string>
     </property>
    </column>
    <column>
@@ -63,12 +70,12 @@
    </column>
    <column>
     <property name="text">
-     <string>Prix Par Jour</string>
+     <string>State</string>
     </property>
    </column>
    <column>
     <property name="text">
-     <string>State</string>
+     <string>Prix Par Jour</string>
     </property>
    </column>
   </widget>
@@ -124,8 +131,8 @@
     <rect>
      <x>120</x>
      <y>160</y>
-     <width>856</width>
-     <height>25</height>
+     <width>915</width>
+     <height>30</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout">

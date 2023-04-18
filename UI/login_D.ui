@@ -13,6 +13,13 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QDialog {
+            background-image: url(&quot;./images/login.jpg&quot;); 
+            background-repeat: no-repeat; 
+            background-position: center;
+        }</string>
+  </property>
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
     <rect>
