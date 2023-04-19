@@ -4,15 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b2301737-5ab9-42d0-806e-474463df99ce" name="Changes" comment="">
+    <list default="true" id="b2301737-5ab9-42d0-806e-474463df99ce" name="Changes" comment="mod stuff">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/Car_Controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/Car_Controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/LoginPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/LoginPage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/MainPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/MainPage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/MessageBox.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/MessageBox.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/login_D.ui" beforeDir="false" afterPath="$PROJECT_DIR$/UI/login_D.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/tabw.ui" beforeDir="false" afterPath="$PROJECT_DIR$/UI/tabw.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +14,19 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="4bd82431-b58f-490e-b20c-e6c595c442e8" />
+        <option name="url" value="https://github.com/Rolerdxx/Car-Rental.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -56,9 +62,21 @@
       <option name="presentableId" value="Default" />
       <updated>1681605535675</updated>
     </task>
+    <task id="LOCAL-00001" summary="mod stuff">
+      <created>1681862069127</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1681862069127</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName="requirements.txt" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="mod stuff" />
+    <option name="LAST_COMMIT_MESSAGE" value="mod stuff" />
   </component>
 </project>

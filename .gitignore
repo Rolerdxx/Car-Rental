@@ -5,6 +5,7 @@ cecog_rc.py
 dist
 build
 venv
+.idea
 Analysis
 *.pkl
 Release/
