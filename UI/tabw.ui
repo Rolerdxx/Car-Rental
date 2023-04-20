@@ -219,9 +219,9 @@
      <widget class="QLineEdit" name="lineEdit"/>
     </item>
     <item>
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="Filter">
       <property name="text">
-       <string>Search</string>
+       <string>Filter</string>
       </property>
      </widget>
     </item>

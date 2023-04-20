@@ -8,19 +8,25 @@ from PyQt5.QtGui import QPixmap
 import bcrypt
 
 
+# Class dyal main page
+
+
 class MainWindow(QDialog):
-    def __init__(self):
+    def __init__(self):  # Hada constructor hadchi hna kayexecuta fach kat7el l page
         super(MainWindow, self).__init__()
         loadUi("./UI/tabw.ui", self)
         self.currentuser = "Guest"
         self.db = CarRentalDB()
         # self.tableWidget.setColumnWidth(0,250)
         self.loaddata()
-        self.pushButton.clicked.connect(self.click)
-        self.loginbutton.clicked.connect(self.login)
+        self.Filter.clicked.connect(self.filter)  # connect Filter button m3a fonction dyalha
+        self.loginbutton.clicked.connect(self.login)  # connect login button m3a fonction dyalha
 
-    def loaddata(self):
+    def loaddata(self):  # fonction katjib ga3 cars mn database o kat afichihom f tableWidget
         cars = self.db.getallcars()
+        self.showdata(cars)
+
+    def showdata(self, cars):  # had fonction katched cars li jawha f parametre o kataffechihom f table
         for row_number, row_data in enumerate(cars):
             self.tableWidget.insertRow(row_number)
             for column_number, column_data in enumerate(row_data):
@@ -37,7 +43,7 @@ class MainWindow(QDialog):
                     self.tableWidget.setItem(row_number, column_number, QtWidgets.QTableWidgetItem(item))
         self.tableWidget.verticalHeader().setDefaultSectionSize(80)
 
-    def click(self):
+    def filter(self):
         print("Search!!!!A")
 
     def login(self):

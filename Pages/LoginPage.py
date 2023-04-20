@@ -2,12 +2,14 @@ from PyQt5.uic import loadUi
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QDialog
 
+# class dyal login dialog
 class LoginDialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
         loadUi("./UI/login_D.ui", self)
-        self.passline.setEchoMode(QtWidgets.QLineEdit.Password)
+        self.passline.setEchoMode(QtWidgets.QLineEdit.Password)  # password kaywli kayban haka ****
 
+    # hado katjib bihom data l window lhra
     def getemail(self):
         return self.emailline.text()
 
