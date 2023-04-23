@@ -19,6 +19,7 @@ class MainWindow(QDialog):
         self.widget = widget
         self.currentuser = "Guest"
         self.db = CarRentalDB()
+        self.carpagecounter = 0
         self.cars = []
         self.selected = None
         # self.tableWidget.setColumnWidth(0,250)
@@ -56,15 +57,17 @@ class MainWindow(QDialog):
         self.selected = self.tableWidget.currentRow()
 
     def switchpage(self):
-        carpage = CarPage(self, "dawsd")
-        self.widget.addWidget(carpage)
-        self.widget.setCurrentIndex(1)
-        #carpage.setWidget(self.widget)
+        if self.selected is not None:
+            carpage = CarPage(self)
+            self.carpagecounter += 1
+            self.widget.addWidget(carpage)
+            self.widget.setCurrentIndex(self.carpagecounter)
 
     def login(self):
         logdialog = LoginDialog(self)
         logdialog.setFixedHeight(400)
         logdialog.setFixedWidth(711)
+        logdialog.setWindowTitle("Login Page")
         response = logdialog.exec()
         if response:
             email = logdialog.getemail()

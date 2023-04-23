@@ -36,19 +36,6 @@
     <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
    </property>
   </widget>
-  <widget class="QLabel" name="label23">
-   <property name="geometry">
-    <rect>
-     <x>450</x>
-     <y>150</y>
-     <width>47</width>
-     <height>13</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Email:</string>
-   </property>
-  </widget>
   <widget class="QLineEdit" name="emailline">
    <property name="geometry">
     <rect>
@@ -69,13 +56,26 @@
     </rect>
    </property>
   </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>430</x>
+     <y>140</y>
+     <width>55</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Email:</string>
+   </property>
+  </widget>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>450</x>
-     <y>200</y>
-     <width>51</width>
-     <height>16</height>
+     <x>430</x>
+     <y>196</y>
+     <width>71</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="text">
