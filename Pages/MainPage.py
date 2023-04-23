@@ -21,6 +21,7 @@ class MainWindow(QDialog):
         self.loaddata()
         self.Filter.clicked.connect(self.filter)  # connect Filter button m3a fonction dyalha
         self.loginbutton.clicked.connect(self.login)  # connect login button m3a fonction dyalha
+        self.Signupbtnpush.clicked.connect(self.Signupfunction)
 
     def loaddata(self):  # fonction katjib ga3 cars mn database o kat afichihom f tableWidget
         cars = self.db.getallcars()
@@ -77,3 +78,6 @@ class MainWindow(QDialog):
         pixmap.loadFromData(image, 'jpg')
         imageLabel.setPixmap(pixmap)
         return imageLabel
+
+    def Signupfunction(self):
+        print("Hello world")
