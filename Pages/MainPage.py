@@ -24,6 +24,7 @@ class MainWindow(QDialog):
         self.selected = None
         # self.tableWidget.setColumnWidth(0,250)
         self.loaddata()
+        self.loadparametrs()
         self.Filter.clicked.connect(self.filter)  # connect Filter button m3a fonction dyalha
         self.loginbutton.clicked.connect(self.login)  # connect login button m3a fonction dyalha
         self.tableWidget.itemClicked.connect(self.select)
@@ -32,6 +33,25 @@ class MainWindow(QDialog):
     def loaddata(self):  # fonction katjib ga3 cars mn database o kat afichihom f tableWidget
         self.cars = self.db.getallcars()
         self.showdata(self.cars)
+
+    def loaddata2(self, marque, modele, carburant, place, transmission, prix):
+        cars2 = self.db.getsomecars(marque, modele, carburant, place, transmission, prix)
+        print(cars2)
+        self.showdata(cars2)
+
+    def loadparametrs(self):
+        marque = self.marque
+        carburant = self.carburant
+        transmission = self.transmission
+        marques = self.db.getmarques()
+        transmissions = self.db.gettransmissions()
+        carburants = self.db.getcarburants()
+        for choice in marques:
+            marque.addItem(choice[0])
+        for choice in transmissions:
+            transmission.addItem(choice[0])
+        for choice in carburants:
+            carburant.addItem(choice[0])
 
     def showdata(self, cars):  # had fonction katched cars li jawha f parametre o kataffechihom f table
         for row_number, row_data in enumerate(cars):
@@ -51,7 +71,18 @@ class MainWindow(QDialog):
         self.tableWidget.verticalHeader().setDefaultSectionSize(80)
 
     def filter(self):
-        print("Search!!!!A")
+        marque = self.marque.currentText()
+        modele = self.modele.text()
+        carburant = self.carburant.currentText()
+        place = self.place.text()
+        transmission = self.transmission.currentText()
+        prix = self.prix.text()
+        if marque == "none" and transmission == "none" and carburant == "none" and prix == "" and place == "" and modele == "":
+            self.cleartable()
+            self.loaddata()
+        else:
+            self.cleartable()
+            self.loaddata2(marque, modele, carburant, place, transmission, prix)
 
     def select(self):
         self.selected = self.tableWidget.currentRow()
@@ -86,3 +117,8 @@ class MainWindow(QDialog):
                     msgbox("Login", "Password Incorrect")
             else:
                 msgbox("Login", "Cannot login")
+
+    def cleartable(self):
+        self.tableWidget.clear()
+        self.tableWidget.setRowCount(0)
+        self.tableWidget.setHorizontalHeaderLabels(['image', 'marque', 'modele', 'carburant', 'places', 'transmission', 'State', 'Prix Par Jour'])
