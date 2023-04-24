@@ -131,7 +131,7 @@
     <rect>
      <x>120</x>
      <y>160</y>
-     <width>915</width>
+     <width>969</width>
      <height>30</height>
     </rect>
    </property>
@@ -144,7 +144,13 @@
      </widget>
     </item>
     <item>
-     <widget class="QComboBox" name="comboBox"/>
+     <widget class="QComboBox" name="marque">
+      <item>
+       <property name="text">
+        <string>none</string>
+       </property>
+      </item>
+     </widget>
     </item>
     <item>
      <widget class="QLabel" name="label_3">
@@ -154,7 +160,12 @@
      </widget>
     </item>
     <item>
-     <widget class="QComboBox" name="comboBox_2">
+     <widget class="QComboBox" name="transmission">
+      <item>
+       <property name="text">
+        <string>none</string>
+       </property>
+      </item>
       <item>
        <property name="text">
         <string>manuel</string>
@@ -175,7 +186,12 @@
      </widget>
     </item>
     <item>
-     <widget class="QComboBox" name="comboBox_3">
+     <widget class="QComboBox" name="carburant">
+      <item>
+       <property name="text">
+        <string>none</string>
+       </property>
+      </item>
       <item>
        <property name="text">
         <string>essence</string>
@@ -196,7 +212,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="lineEdit_2"/>
+     <widget class="QLineEdit" name="prix"/>
     </item>
     <item>
      <widget class="QLabel" name="label_7">
@@ -206,7 +222,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="lineEdit_3"/>
+     <widget class="QLineEdit" name="place"/>
     </item>
     <item>
      <widget class="QLabel" name="label_6">
@@ -216,7 +232,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="lineEdit"/>
+     <widget class="QLineEdit" name="modele"/>
     </item>
     <item>
      <widget class="QPushButton" name="Filter">
@@ -226,6 +242,24 @@
      </widget>
     </item>
    </layout>
+  </widget>
+  <widget class="QLabel" name="error">
+   <property name="geometry">
+    <rect>
+     <x>580</x>
+     <y>140</y>
+     <width>461</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgba(0,0,0,0);
+color:red;
+font-size:11px;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
   </widget>
  </widget>
  <resources/>

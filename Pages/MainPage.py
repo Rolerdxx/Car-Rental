@@ -25,6 +25,11 @@ class MainWindow(QDialog):
     def loaddata(self):  # fonction katjib ga3 cars mn database o kat afichihom f tableWidget
         cars = self.db.getallcars()
         self.showdata(cars)
+    def loaddata2(self,marque,modele,carburant,place,transmission,prix):
+        print("khdama")
+        cars2=self.db.getsomecars(marque,modele,carburant,place,transmission,prix)
+        print("khdama 2")
+        self.showdata(cars2)
 
     def showdata(self, cars):  # had fonction katched cars li jawha f parametre o kataffechihom f table
         for row_number, row_data in enumerate(cars):
@@ -44,7 +49,34 @@ class MainWindow(QDialog):
         self.tableWidget.verticalHeader().setDefaultSectionSize(80)
 
     def filter(self):
-        print("Search!!!!A")
+       marque=self.marque.currentText()
+       modele = self.modele.text()
+       carburant = self.carburant.currentText()
+       place = self.place.text()
+       transmission=self.transmission.currentText()
+       prix=self.prix.text()
+       error=self.error
+       if(marque=="none" and transmission=="none" and carburant=="none" and prix=="" and place=="" and modele==""):
+           error.setText("empty champs!!!")
+       else:
+           self.loaddata2(marque,modele,carburant,place,transmission,prix)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     def login(self):
         logdialog = LoginDialog(self)
