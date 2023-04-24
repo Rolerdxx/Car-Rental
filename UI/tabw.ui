@@ -166,16 +166,6 @@
         <string>none</string>
        </property>
       </item>
-      <item>
-       <property name="text">
-        <string>manuel</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>automatic</string>
-       </property>
-      </item>
      </widget>
     </item>
     <item>
@@ -190,16 +180,6 @@
       <item>
        <property name="text">
         <string>none</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>essence</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>gazole</string>
        </property>
       </item>
      </widget>

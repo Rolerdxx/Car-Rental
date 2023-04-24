@@ -19,6 +19,7 @@ class MainWindow(QDialog):
         self.db = CarRentalDB()
         # self.tableWidget.setColumnWidth(0,250)
         self.loaddata()
+        self.loadparametrs()
         self.Filter.clicked.connect(self.filter)  # connect Filter button m3a fonction dyalha
         self.loginbutton.clicked.connect(self.login)  # connect login button m3a fonction dyalha
 
@@ -26,11 +27,22 @@ class MainWindow(QDialog):
         cars = self.db.getallcars()
         self.showdata(cars)
     def loaddata2(self,marque,modele,carburant,place,transmission,prix):
-        print("khdama")
         cars2=self.db.getsomecars(marque,modele,carburant,place,transmission,prix)
-        print("khdama 2")
         self.showdata(cars2)
 
+    def loadparametrs(self):
+        marque = self.marque
+        carburant = self.carburant
+        transmission=self.transmission
+        marques=self.db.getmarques()
+        transmissions=self.db.gettransmissions()
+        carburants=self.db.getcarburants()
+        for choice in marques:
+            marque.addItem(choice[0])
+        for choice in transmissions:
+            transmission.addItem(choice[0])
+        for choice in carburants:
+            carburant.addItem(choice[0])
     def showdata(self, cars):  # had fonction katched cars li jawha f parametre o kataffechihom f table
         for row_number, row_data in enumerate(cars):
             self.tableWidget.insertRow(row_number)
