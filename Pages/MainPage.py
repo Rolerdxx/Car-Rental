@@ -1,9 +1,11 @@
+import mysql.connector
 from PyQt5.uic import loadUi
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QDialog
 from Database.CarRental_database import CarRentalDB
 from Pages.MessageBox import msgbox
 from Pages.LoginPage import LoginDialog
+from Pages.SignUpPage import SignupWindow
 from PyQt5.QtGui import QPixmap
 import bcrypt
 
@@ -79,5 +81,28 @@ class MainWindow(QDialog):
         imageLabel.setPixmap(pixmap)
         return imageLabel
 
-    def Signupfunction(self):
-        print("Hello world")
+    def signupfunction(self, nom, prenom, email, password):
+        conn = mysql.connector.connect(
+            host='localhost',
+            user='root',
+            password='',
+            database='carrental'
+        )
+        signupdialog = SignupWindow()
+        response = signupdialog.exec()
+        if response:
+            cur = conn.cursor()
+
+        cur.execute('SELECT * FROM userr WHERE email=%s', (email,))
+        row = cur.fetchone()
+        if row is not None:
+            print('Utilisateur deja existe')
+            return False
+        cur.execute('INSERT INTO USERR (nom,prenom,email,passwordEn) VALUES (%s,%s,%s,%s)',
+                    (nom, prenom, email, password))
+        conn.commit()
+
+        cur.close()
+        conn.close()
+        print('Utilisateur ajouté')
+        return True

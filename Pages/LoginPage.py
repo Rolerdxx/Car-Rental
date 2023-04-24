@@ -9,7 +9,7 @@ class LoginDialog(QDialog):
         loadUi("./UI/login_D.ui", self)
         self.passline.setEchoMode(QtWidgets.QLineEdit.Password)  # password kaywli kayban haka ****
 
-    # hado katjib bihom data l window lhra
+    # hado katjib bihom data l window lkhra
     def getemail(self):
         return self.emailline.text()
 
