@@ -223,6 +223,19 @@
     </item>
    </layout>
   </widget>
+  <widget class="QPushButton" name="reserveButton">
+   <property name="geometry">
+    <rect>
+     <x>910</x>
+     <y>540</y>
+     <width>75</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Reserve</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>
