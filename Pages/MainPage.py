@@ -26,23 +26,26 @@ class MainWindow(QDialog):
     def loaddata(self):  # fonction katjib ga3 cars mn database o kat afichihom f tableWidget
         cars = self.db.getallcars()
         self.showdata(cars)
-    def loaddata2(self,marque,modele,carburant,place,transmission,prix):
-        cars2=self.db.getsomecars(marque,modele,carburant,place,transmission,prix)
+
+    def loaddata2(self, marque, modele, carburant, place, transmission, prix):
+        cars2 = self.db.getsomecars(marque, modele, carburant, place, transmission, prix)
+        print(cars2)
         self.showdata(cars2)
 
     def loadparametrs(self):
         marque = self.marque
         carburant = self.carburant
-        transmission=self.transmission
-        marques=self.db.getmarques()
-        transmissions=self.db.gettransmissions()
-        carburants=self.db.getcarburants()
+        transmission = self.transmission
+        marques = self.db.getmarques()
+        transmissions = self.db.gettransmissions()
+        carburants = self.db.getcarburants()
         for choice in marques:
             marque.addItem(choice[0])
         for choice in transmissions:
             transmission.addItem(choice[0])
         for choice in carburants:
             carburant.addItem(choice[0])
+
     def showdata(self, cars):  # had fonction katched cars li jawha f parametre o kataffechihom f table
         for row_number, row_data in enumerate(cars):
             self.tableWidget.insertRow(row_number)
@@ -61,34 +64,18 @@ class MainWindow(QDialog):
         self.tableWidget.verticalHeader().setDefaultSectionSize(80)
 
     def filter(self):
-       marque=self.marque.currentText()
-       modele = self.modele.text()
-       carburant = self.carburant.currentText()
-       place = self.place.text()
-       transmission=self.transmission.currentText()
-       prix=self.prix.text()
-       error=self.error
-       if(marque=="none" and transmission=="none" and carburant=="none" and prix=="" and place=="" and modele==""):
-           error.setText("empty champs!!!")
-       else:
-           self.loaddata2(marque,modele,carburant,place,transmission,prix)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        marque = self.marque.currentText()
+        modele = self.modele.text()
+        carburant = self.carburant.currentText()
+        place = self.place.text()
+        transmission = self.transmission.currentText()
+        prix = self.prix.text()
+        if marque == "none" and transmission == "none" and carburant == "none" and prix == "" and place == "" and modele == "":
+            self.cleartable()
+            self.loaddata()
+        else:
+            self.cleartable()
+            self.loaddata2(marque, modele, carburant, place, transmission, prix)
 
     def login(self):
         logdialog = LoginDialog(self)
@@ -112,6 +99,11 @@ class MainWindow(QDialog):
                     msgbox("Login", "Password Incorrect")
             else:
                 msgbox("Login", "Cannot login")
+
+    def cleartable(self):
+        self.tableWidget.clear()
+        self.tableWidget.setRowCount(0)
+        self.tableWidget.setHorizontalHeaderLabels(['image', 'marque', 'modele', 'carburant', 'places', 'transmission', 'State', 'Prix Par Jour'])
 
     def getImageLabel(self, image):
         imageLabel = QtWidgets.QLabel(self)
