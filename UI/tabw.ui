@@ -23,11 +23,49 @@
   <widget class="QTableWidget" name="tableWidget">
    <property name="geometry">
     <rect>
-     <x>100</x>
-     <y>200</y>
-     <width>881</width>
-     <height>331</height>
+     <x>50</x>
+     <y>180</y>
+     <width>971</width>
+     <height>381</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">/* Set the font family and size for the table */
+QTableWidget {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+background-color:rgba(0,0,0,0);
+ border-radius:5px;
+}
+
+/* Style for the column headers */
+QHeaderView::section {
+  background-color:rgba(0,0,0,100);
+  color: #fff;
+
+  font-weight: bold;
+  padding: 5px;
+  text-align: center;
+}
+
+/* Style for the rows */
+QTableWidget::item {
+  padding: 5px;
+  border: none;
+  font-size: 16px;
+}
+
+/* Style for the even rows */
+QTableWidget::item:nth-of-type(even) {
+  background-color: #f2f2f2;
+}
+
+/* Style for the selected rows */
+QTableView::item:selected {
+  background-color: #007bff;
+  color: #fff;
+}
+</string>
    </property>
    <property name="selectionMode">
     <enum>QAbstractItemView::SingleSelection</enum>
@@ -37,6 +75,9 @@
    </property>
    <attribute name="horizontalHeaderCascadingSectionResizes">
     <bool>false</bool>
+   </attribute>
+   <attribute name="horizontalHeaderDefaultSectionSize">
+    <number>117</number>
    </attribute>
    <column>
     <property name="text">
@@ -79,150 +120,6 @@
     </property>
    </column>
   </widget>
-  <widget class="QPushButton" name="loginbutton">
-   <property name="geometry">
-    <rect>
-     <x>410</x>
-     <y>80</y>
-     <width>91</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>SignIn</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>520</x>
-     <y>30</y>
-     <width>311</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Segoe UI Variable Display Semib</family>
-     <pointsize>18</pointsize>
-     <weight>75</weight>
-     <bold>true</bold>
-    </font>
-   </property>
-   <property name="text">
-    <string>Good Morning Guest!</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_2">
-   <property name="geometry">
-    <rect>
-     <x>320</x>
-     <y>80</y>
-     <width>81</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>SignUp</string>
-   </property>
-  </widget>
-  <widget class="QWidget" name="layoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>120</x>
-     <y>160</y>
-     <width>969</width>
-     <height>30</height>
-    </rect>
-   </property>
-   <layout class="QHBoxLayout" name="horizontalLayout">
-    <item>
-     <widget class="QLabel" name="label_2">
-      <property name="text">
-       <string>Marque:</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QComboBox" name="marque">
-      <item>
-       <property name="text">
-        <string>none</string>
-       </property>
-      </item>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="label_3">
-      <property name="text">
-       <string>Transmission:</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QComboBox" name="transmission">
-      <item>
-       <property name="text">
-        <string>none</string>
-       </property>
-      </item>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="label_4">
-      <property name="text">
-       <string>Carburant</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QComboBox" name="carburant">
-      <item>
-       <property name="text">
-        <string>none</string>
-       </property>
-      </item>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="label_5">
-      <property name="text">
-       <string>Price per Day:</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLineEdit" name="prix"/>
-    </item>
-    <item>
-     <widget class="QLabel" name="label_7">
-      <property name="text">
-       <string>Places:</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLineEdit" name="place"/>
-    </item>
-    <item>
-     <widget class="QLabel" name="label_6">
-      <property name="text">
-       <string>Modele:</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLineEdit" name="modele"/>
-    </item>
-    <item>
-     <widget class="QPushButton" name="Filter">
-      <property name="text">
-       <string>Filter</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
   <widget class="QPushButton" name="reserveButton">
    <property name="geometry">
     <rect>
@@ -236,7 +133,251 @@
     <string>Reserve</string>
    </property>
   </widget>
+  <widget class="QFrame" name="frame">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1071</width>
+     <height>601</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">
+border-image: url(:/newPrefix/images/mainimage.jpg);</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <widget class="QWidget" name="layoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>150</y>
+      <width>971</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="label_2">
+       <property name="styleSheet">
+        <string notr="true">color :black;
+font-weight:bold;</string>
+       </property>
+       <property name="text">
+        <string>Marque:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="marque">
+       <property name="styleSheet">
+        <string notr="true">background-color:#036161;
+color: white;
+font-weight:bold;
+border: solid 0px;
+height:20px</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>none</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_3">
+       <property name="styleSheet">
+        <string notr="true">color :black;font-weight:bold;</string>
+       </property>
+       <property name="text">
+        <string>Transmission:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="transmission">
+       <property name="styleSheet">
+        <string notr="true">background-color:#036161;
+color: white;
+font-weight:bold;
+border: solid 0px;
+height:20px</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>none</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_4">
+       <property name="styleSheet">
+        <string notr="true">color :black;
+font-weight:bold;</string>
+       </property>
+       <property name="text">
+        <string>Carburant</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="carburant">
+       <property name="styleSheet">
+        <string notr="true">background-color:#036161;
+color: white;
+font-weight:bold;
+border: solid 0px;
+height:20px</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>none</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_5">
+       <property name="styleSheet">
+        <string notr="true">font-weight:bold;color :black;</string>
+       </property>
+       <property name="text">
+        <string>Price per Day:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="prix">
+       <property name="styleSheet">
+        <string notr="true">background-color:#036161;
+color: white;
+font-weight:bold;
+bolder:solid 0px</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_7">
+       <property name="styleSheet">
+        <string notr="true">font-weight:bold;color :black;</string>
+       </property>
+       <property name="text">
+        <string>Places:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="place">
+       <property name="styleSheet">
+        <string notr="true">background-color:#036161;
+color: white;
+font-weight:bold;
+bolder:solid 0px</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_6">
+       <property name="styleSheet">
+        <string notr="true">font-weight:bold;color :black;</string>
+       </property>
+       <property name="text">
+        <string>Modele:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="modele">
+       <property name="styleSheet">
+        <string notr="true">background-color:#036161;
+color: white;
+font-weight:bold;
+bolder:solid 0px</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="Filter">
+       <property name="styleSheet">
+        <string notr="true">font-weight:bold;
+height:20px;
+width:35px</string>
+       </property>
+       <property name="text">
+        <string>Filter</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>40</y>
+      <width>311</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Oswald Stencil</family>
+      <pointsize>18</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Good Morning Guest!</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>700</x>
+      <y>40</y>
+      <width>281</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QPushButton" name="loginbutton">
+       <property name="styleSheet">
+        <string notr="true">height:30px;</string>
+       </property>
+       <property name="text">
+        <string>SignIn</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_2">
+       <property name="styleSheet">
+        <string notr="true">height:30px;</string>
+       </property>
+       <property name="text">
+        <string>SignUp</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <zorder>frame</zorder>
+  <zorder>tableWidget</zorder>
+  <zorder>loginbutton</zorder>
+  <zorder>pushButton_2</zorder>
+  <zorder>reserveButton</zorder>
  </widget>
- <resources/>
+ <resources>
+  <include location="image.qrc"/>
+ </resources>
  <connections/>
 </ui>
