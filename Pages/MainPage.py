@@ -1,7 +1,8 @@
-import mysql.connector
 from PyQt5.uic import loadUi
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QDialog
+
+from Controllers.User_Controller import Signup
 from Database.CarRental_database import CarRentalDB
 from Pages.MessageBox import msgbox
 from Pages.LoginPage import LoginDialog
@@ -23,7 +24,7 @@ class MainWindow(QDialog):
         self.loaddata()
         self.Filter.clicked.connect(self.filter)  # connect Filter button m3a fonction dyalha
         self.loginbutton.clicked.connect(self.login)  # connect login button m3a fonction dyalha
-        self.Signupbtnpush.clicked.connect(self.Signupfunction)
+        self.Signupbtnpush.clicked.connect(self.signupfunction)
 
     def loaddata(self):  # fonction katjib ga3 cars mn database o kat afichihom f tableWidget
         cars = self.db.getallcars()
@@ -81,28 +82,9 @@ class MainWindow(QDialog):
         imageLabel.setPixmap(pixmap)
         return imageLabel
 
-    def signupfunction(self, nom, prenom, email, password):
-        conn = mysql.connector.connect(
-            host='localhost',
-            user='root',
-            password='',
-            database='carrental'
-        )
+    def signupfunction(self):
         signupdialog = SignupWindow()
         response = signupdialog.exec()
         if response:
-            cur = conn.cursor()
-
-        cur.execute('SELECT * FROM userr WHERE email=%s', (email,))
-        row = cur.fetchone()
-        if row is not None:
-            print('Utilisateur deja existe')
-            return False
-        cur.execute('INSERT INTO USERR (nom,prenom,email,passwordEn) VALUES (%s,%s,%s,%s)',
-                    (nom, prenom, email, password))
-        conn.commit()
-
-        cur.close()
-        conn.close()
-        print('Utilisateur ajouté')
-        return True
+            data = signupdialog.datagets()
+            self.db.Signup(data)

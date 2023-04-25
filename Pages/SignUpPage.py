@@ -1,24 +1,19 @@
 from PyQt5.uic import loadUi
-from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QDialog
 
-class SignupWindow(QtWidgets.QMainWindow):
-    def __init__(self):
-        super(SignupWindow,self).__init__()
-        loadUi('Signup.ui',self)
 
-        self.signupbtn.clicked.connect(self.handle_signup)
-    def handle_signup(self):
-        nom1 = self.nomline.text()
-        prenom1 = self.prline.text()
-        email1 = self.mailine.text()
-        password1 = self.mdpline.text()
+class SignupWindow(QDialog):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        loadUi("./UI/Singup.ui", self)
+    def datagets(self):
+        data=[]
+        data.append(self.nomline.text())
+        data.append(self.prline.text())
+        data.append(self.mailine.text())
+        data.append(self.mdpline.text())
+        return data
 
-        signupfunction(nom1, prenom1, email1, password1)
 
-app = QtWidgets.QApplication([])
-window = SignupWindow()
-window.show()
-app.exec_()
 
 

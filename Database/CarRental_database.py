@@ -1,6 +1,7 @@
 import mysql.connector
 from Controllers.User_Controller import login
 from Controllers.Car_Controller import getallcars
+from Controllers.User_Controller import Signup
 
 
 class CarRentalDB:
@@ -16,3 +17,8 @@ class CarRentalDB:
 
     def getallcars(self):
         return getallcars(self.db)
+
+    def Signup(self, data):
+        print("9alwa")
+        print(data)
+        return Signup(self.db, data)

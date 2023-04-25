@@ -20,7 +20,7 @@
             background-position: center;
         }</string>
   </property>
-  <widget class="QDialogButtonBox" name="buttonBox">
+  <widget class="QDialogButtonBox" name="signupbtn">
    <property name="geometry">
     <rect>
      <x>410</x>
@@ -43,7 +43,7 @@
     <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit">
+  <widget class="QLineEdit" name="nomline">
    <property name="geometry">
     <rect>
      <x>540</x>
@@ -79,7 +79,7 @@
     <string>Prenom</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_2">
+  <widget class="QLineEdit" name="prline">
    <property name="geometry">
     <rect>
      <x>540</x>
@@ -102,7 +102,7 @@
     <string>Email</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_3">
+  <widget class="QLineEdit" name="mailine">
    <property name="geometry">
     <rect>
      <x>540</x>
@@ -125,7 +125,7 @@
     <string>Mot de passe</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_4">
+  <widget class="QLineEdit" name="mdpline">
    <property name="geometry">
     <rect>
      <x>540</x>
@@ -139,7 +139,7 @@
  <resources/>
  <connections>
   <connection>
-   <sender>buttonBox</sender>
+   <sender>signupbtn</sender>
    <signal>accepted()</signal>
    <receiver>Dialog</receiver>
    <slot>accept()</slot>
@@ -155,7 +155,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>buttonBox</sender>
+   <sender>signupbtn</sender>
    <signal>rejected()</signal>
    <receiver>Dialog</receiver>
    <slot>reject()</slot>
