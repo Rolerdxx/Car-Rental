@@ -2,7 +2,7 @@ from PyQt5.uic import loadUi
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QDialog
 from Database.CarRental_database import CarRentalDB
-from Pages.MessageBox import msgbox
+from Helpers.MessageBox import msgbox
 from Pages.LoginPage import LoginDialog
 from Pages.CarPage import CarPage
 from Helpers.ImageLabel import getImageLabel
@@ -36,7 +36,6 @@ class MainWindow(QDialog):
 
     def loaddata2(self, marque, modele, carburant, place, transmission, prix):
         cars2 = self.db.getsomecars(marque, modele, carburant, place, transmission, prix)
-        print(cars2)
         self.showdata(cars2)
 
     def loadparametrs(self):
@@ -95,7 +94,7 @@ class MainWindow(QDialog):
             self.widget.setCurrentIndex(self.carpagecounter)
 
     def login(self):
-        logdialog = LoginDialog(self)
+        logdialog = LoginDialog(db=self.db)
         logdialog.setFixedHeight(400)
         logdialog.setFixedWidth(711)
         logdialog.setWindowTitle("Login Page")
