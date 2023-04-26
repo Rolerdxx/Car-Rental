@@ -5,7 +5,7 @@ from PyQt5 import QtGui
 # import pyqtcss
 from Pages.MainPage import MainWindow
 
-style = open("./styles/QSS/MacOS.qss", "r")
+style = open("./styles/QSS/AMOLED.qss", "r")
 stylesheet = style.read()
 # style_string = pyqtcss.get_style("dark_orange")
 app = QApplication(sys.argv)

@@ -7,7 +7,7 @@ from Pages.LoginPage import LoginDialog
 from Pages.CarPage import CarPage
 from Helpers.ImageLabel import getImageLabel
 import bcrypt
-
+from PyQt5 import QtCore
 
 # Class dyal main page
 
@@ -98,6 +98,8 @@ class MainWindow(QDialog):
         logdialog.setFixedHeight(400)
         logdialog.setFixedWidth(711)
         logdialog.setWindowTitle("Login Page")
+       # logdialog.setWindowFlags(QtCore.Qt.FramelessWindowHint)
+        #logdialog.setAttribute(QtCore.Qt.WA_TranslucentBackground)
         response = logdialog.exec()
         if response:
             email = logdialog.getemail()
