@@ -85,14 +85,14 @@
   <widget class="QPushButton" name="forgotbtn">
    <property name="geometry">
     <rect>
-     <x>454</x>
+     <x>460</x>
      <y>250</y>
      <width>101</width>
      <height>23</height>
     </rect>
    </property>
    <property name="text">
-    <string>Forgot Password</string>
+    <string>Forgot password</string>
    </property>
   </widget>
  </widget>
