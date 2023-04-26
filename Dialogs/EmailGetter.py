@@ -1,11 +1,12 @@
-from PyQt5.uic import loadUi
 from PyQt5.QtWidgets import QDialog
+from UI.emailgetter import Ui_Dialog
 
 
 class EmailGetterDialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
-        loadUi("./UI/emailgetter_D.ui", self)
+        self.ui = Ui_Dialog()
+        self.ui.setupUi(self)
 
     def getemail(self):
-        return self.emailline.text()
+        return self.ui.emailline.text()

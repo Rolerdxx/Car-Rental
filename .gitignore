@@ -62,3 +62,4 @@ resource.py
 *.l[doa]
 *.loT
 sendgrid.env
+main.spec
