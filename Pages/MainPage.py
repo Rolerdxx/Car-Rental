@@ -25,6 +25,8 @@ class MainWindow(QDialog):
         self.Filter.clicked.connect(self.filter)  # connect Filter button m3a fonction dyalha
         self.loginbutton.clicked.connect(self.login)  # connect login button m3a fonction dyalha
         self.Signupbtnpush.clicked.connect(self.signupfunction)
+        self.signupbtn.clicked.connect(self.passwordvalidation)
+
 
     def loaddata(self):  # fonction katjib ga3 cars mn database o kat afichihom f tableWidget
         cars = self.db.getallcars()
@@ -88,3 +90,5 @@ class MainWindow(QDialog):
         if response:
             data = signupdialog.datagets()
             self.db.Signup(data)
+
+    def passwordfunction(self):
