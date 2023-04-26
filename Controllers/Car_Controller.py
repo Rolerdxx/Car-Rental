@@ -29,6 +29,5 @@ def getsomecars(db, marque, modele, carburant, place, transmission, prix):
         values.append(float(prix))
     if sql.endswith("AND"):
         sql = sql[:-4]
-    print(sql, values)
     mycursor.execute(sql, values)
     return mycursor.fetchall()
