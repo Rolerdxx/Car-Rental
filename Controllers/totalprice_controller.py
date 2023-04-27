@@ -1,2 +1,2 @@
-def totalprice(prixparjour,nbrjours):
-    return prixparjour*nbrjours
+def totalprice(prixparjour,nbrjour):
+    return prixparjour*nbrjour
