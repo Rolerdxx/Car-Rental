@@ -66,7 +66,7 @@ border-radius:5px;</string>
     <string>back to main page</string>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>70</x>
@@ -238,7 +238,7 @@ color:black;</string>
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>450</x>
@@ -369,6 +369,34 @@ color:black;</string>
      </layout>
     </item>
    </layout>
+  </widget>
+  <widget class="QPushButton" name="reserveButton">
+   <property name="geometry">
+    <rect>
+     <x>740</x>
+     <y>480</y>
+     <width>211</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Oswald Stencil</family>
+     <pointsize>12</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font-weight:bold;
+font-family:Oswald Stencil;
+color:white;
+border : 0px;
+border-radius:5px;</string>
+   </property>
+   <property name="text">
+    <string>reserver cette voiture</string>
+   </property>
   </widget>
  </widget>
  <resources/>
