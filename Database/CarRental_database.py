@@ -19,6 +19,5 @@ class CarRentalDB:
         return getallcars(self.db)
 
     def Signup(self, data):
-        print("9alwa")
         print(data)
         return Signup(self.db, data)

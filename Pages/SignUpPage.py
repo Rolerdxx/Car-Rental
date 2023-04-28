@@ -19,17 +19,6 @@ class SignupWindow(QDialog):
         data.append(self.mdpline.text())
         return data
 
-    def passwordvalidation(self, mdpline):
-        mdp = mdpline.text()
-        if(len(mdp)<8):
-            return False
-        if not re.search("[a-z]", mdp):
-            return False
-        if not re.search("[A-Z]", mdp):
-            return False
-        if not re.search("[0-9]", mdp):
-            return False
-        return True
 
 
 

@@ -9,6 +9,7 @@ from Pages.LoginPage import LoginDialog
 from Pages.SignUpPage import SignupWindow
 from PyQt5.QtGui import QPixmap
 import bcrypt
+import re
 
 
 # Class dyal main page
@@ -25,7 +26,6 @@ class MainWindow(QDialog):
         self.Filter.clicked.connect(self.filter)  # connect Filter button m3a fonction dyalha
         self.loginbutton.clicked.connect(self.login)  # connect login button m3a fonction dyalha
         self.Signupbtnpush.clicked.connect(self.signupfunction)
-        self.signupbtn.clicked.connect(self.passwordvalidation)
 
 
     def loaddata(self):  # fonction katjib ga3 cars mn database o kat afichihom f tableWidget
@@ -91,4 +91,14 @@ class MainWindow(QDialog):
             data = signupdialog.datagets()
             self.db.Signup(data)
 
-    def passwordfunction(self):
+    def passwordvalidation(self):
+        mdp = self.mdpline.text()
+        if(len(mdp)<8):
+            print("plus de 8 ")
+        if not re.search("[a-z]", mdp):
+            print("des caracteres miniscule")
+        if not re.search("[A-Z]", mdp):
+            print("des caracteres majuscule")
+        if not re.search("[0-9]", mdp):
+            print("des chiffres")
+        print("parfait")
