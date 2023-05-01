@@ -1,6 +1,6 @@
 def getallcars(db):
     mycursor = db.cursor()
-    mycursor.execute("SELECT image,marque,modele,carburant,places,transmission,state,prixParJour FROM voiture")
+    mycursor.execute("SELECT id,image,marque,modele,carburant,places,transmission,state,prixParJour FROM voiture")
     return mycursor.fetchall()
 
 
@@ -31,3 +31,11 @@ def getsomecars(db, marque, modele, carburant, place, transmission, prix):
         sql = sql[:-4]
     mycursor.execute(sql, values)
     return mycursor.fetchall()
+def changestate(db,dateFn):
+    mycursor = db.cursor()
+    sql="UPDATE voiture SET state==0 where CURDATE()< %s"
+    value=(dateFn)
+    mycursor.execute(sql,value)
+    sql = "UPDATE voiture SET state==1 where CURDATE()> %s"
+    value = (dateFn)
+    mycursor.execute(sql, value)

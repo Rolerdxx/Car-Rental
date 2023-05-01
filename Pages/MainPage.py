@@ -29,7 +29,6 @@ class MainWindow(QDialog):
         self.loginbutton.clicked.connect(self.login)  # connect login button m3a fonction dyalha
         self.tableWidget.itemClicked.connect(self.select)
         self.reserveButton.clicked.connect(self.switchpage)
-
     def loaddata(self):  # fonction katjib ga3 cars mn database o kat afichihom f tableWidget
         self.cars = self.db.getallcars()
         self.showdata(self.cars)
@@ -57,10 +56,10 @@ class MainWindow(QDialog):
             self.tableWidget.insertRow(row_number)
             for column_number, column_data in enumerate(row_data):
                 item = str(column_data)
-                if column_number == 0:
+                if column_number == 1:
                     item = getImageLabel(self, column_data)
                     self.tableWidget.setCellWidget(row_number, column_number, item)
-                elif column_number == 6:
+                elif column_number == 7:
                     if item == "1":
                         self.tableWidget.setItem(row_number, column_number, QtWidgets.QTableWidgetItem("Available"))
                     else:
@@ -92,7 +91,6 @@ class MainWindow(QDialog):
             self.carpagecounter += 1
             self.widget.addWidget(carpage)
             self.widget.setCurrentIndex(self.carpagecounter)
-
     def login(self):
         logdialog = LoginDialog(db=self.db)
         logdialog.setFixedHeight(400)
@@ -105,6 +103,8 @@ class MainWindow(QDialog):
             email = logdialog.getemail()
             password = logdialog.getpassword()
             user = self.db.login(email)
+            global userid
+            userid = user[0]
             if user:
                 password = password.encode('utf-8')
                 hashed = user[4][2:-1]
@@ -122,4 +122,6 @@ class MainWindow(QDialog):
     def cleartable(self):
         self.tableWidget.clear()
         self.tableWidget.setRowCount(0)
-        self.tableWidget.setHorizontalHeaderLabels(['image', 'marque', 'modele', 'carburant', 'places', 'transmission', 'State', 'Prix Par Jour'])
+        self.tableWidget.setHorizontalHeaderLabels(['id','image', 'marque', 'modele', 'carburant', 'places', 'transmission', 'State', 'Prix Par Jour'])
+def Reservation():
+        CarPage.reserveit(userid)

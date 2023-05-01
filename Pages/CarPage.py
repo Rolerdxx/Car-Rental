@@ -3,8 +3,7 @@ from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QDialog
 from Helpers.ImageLabel import getImageLabel
 from PyQt5.QtGui import QPixmap
-from Pages.reservation import resevationPage
-
+from Pages.reservation import reservationPage
 class CarPage(QDialog):
     def __init__(self, main):
         super(CarPage, self).__init__()
@@ -20,21 +19,23 @@ class CarPage(QDialog):
 
     def filldata(self):
         pixmap = QPixmap()
-        pixmap.loadFromData(self.car[0], 'jpg')
+        pixmap.loadFromData(self.car[1], 'jpg')
         self.imagelabel.setPixmap(pixmap)
-        self.marquelabel.setText(self.car[1])
-        self.modelelabel.setText(self.car[2])
-        self.carburantlabel.setText(self.car[3])
-        self.placeslabel.setText(str(self.car[4]))
-        self.transmissionlabel.setText(self.car[5])
-        self.statelabel.setText(str(self.car[6]))
-        self.pricelabel.setText(str(self.car[7])+" DH")
+        self.marquelabel.setText(self.car[2])
+        self.modelelabel.setText(self.car[3])
+        self.carburantlabel.setText(self.car[4])
+        self.placeslabel.setText(str(self.car[5]))
+        self.transmissionlabel.setText(self.car[6])
+        self.statelabel.setText(str(self.car[7]))
+        self.pricelabel.setText(str(self.car[8])+" DH")
 
-    def reserveit(self):
+    def reserveit(self,userid):
         state=self.statelabel.text()
         price=self.pricelabel.text()
+        carid=self.car[0]
+        reservationPage.reserveIt(carid,userid,price)
         if state=="1":
             self.Dialog = QtWidgets.QDialog()
-            self.ui = resevationPage()
+            self.ui = reservationPage()
             self.ui.setupUi(self.Dialog)
             self.Dialog.show()

@@ -1,9 +1,9 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
-
-class resevationPage(object):
+from Database.CarRental_database import CarRentalDB
+from Pages.MainPage import Reservation
+class reservationPage(object):
     id = 0
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
@@ -65,10 +65,13 @@ class resevationPage(object):
         self.verticalLayout_2.addLayout(self.horizontalLayout_3)
 
         self.retranslateUi(Dialog)
-        self.buttonBox.accepted.connect(self.reserve) # type: ignore
+        self.buttonBox.accepted.connect(Reservation()) # type: ignore
         self.buttonBox.rejected.connect(Dialog.reject) # type: ignore
         QtCore.QMetaObject.connectSlotsByName(Dialog)
-
+        global dateDB
+        dateDB= self.datedebut.date()
+        global dateFN
+        dateFN= self.datefin.date()
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Reservation Page"))
@@ -77,12 +80,9 @@ class resevationPage(object):
         self.label_3.setText(_translate("Dialog", "Price :"))
         self.price.setText(_translate("Dialog", "0"))
 
-    def reserve(self):
-        resevationPage.id+=1
-        dateDB=self.datedebut.date()
-        dateFN=self.datefin.date()
-        #i need the current user id
-        #i need the car id
-        #i need the price by day of car selected
-        return 0
+    def reserveIt(self,carid, userid, priceperday):
+        self.id += 1
+        dateDB = self.datedebut.date()
+        dateFN = self.datefin.date()
+        CarRentalDB.reservation(reservationPage.id,carid,userid,priceperday,dateDB,dateFN)
 
