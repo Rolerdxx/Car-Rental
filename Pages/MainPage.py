@@ -26,7 +26,7 @@ class MainWindow(QDialog):
         self.Filter.clicked.connect(self.filter)  # connect Filter button m3a fonction dyalha
         self.loginbutton.clicked.connect(self.login)  # connect login button m3a fonction dyalha
         self.Signupbtnpush.clicked.connect(self.signupfunction)
-
+        self.Signupbtnpush.clicked.connect(self.passwordvalidation)
 
     def loaddata(self):  # fonction katjib ga3 cars mn database o kat afichihom f tableWidget
         cars = self.db.getallcars()
@@ -92,13 +92,22 @@ class MainWindow(QDialog):
             self.db.Signup(data)
 
     def passwordvalidation(self):
-        mdp = self.mdpline.text()
-        if(len(mdp)<8):
-            print("plus de 8 ")
-        if not re.search("[a-z]", mdp):
-            print("des caracteres miniscule")
-        if not re.search("[A-Z]", mdp):
-            print("des caracteres majuscule")
-        if not re.search("[0-9]", mdp):
-            print("des chiffres")
-        print("parfait")
+        sipassword = self.mdpline.text()
+        siname = self.nomline.text()
+        siprenom = self.prline.text()
+        simail = self.mailine.text()
+
+        if len(sipassword) < 8:
+            msgbox("Erreur", "Le mot de passe doit etre plus de 8 caracteres ")
+        elif sipassword.isdigit():
+            msgbox("Erreur", "Le mot de passe doit contenir des Lettres")
+        elif sipassword.isupper():
+            msgbox("Erreur", "le mot de passe doint contenur des caracteres miniscule")
+        elif not re.Match("^[a-zA-Z0-9-_]+@[a-zA-Z0-9]+[a-z]{1,3}$", simail):
+            msgbox("Erreur", "la forme de l'email et inccorect")
+        elif siname == "":
+            msgbox("Erreur", "Veuillez remplir le nom")
+        elif siprenom == "":
+            msgbox("Erreur", "Veuillez remplir le prenom")
+        else:
+            msgbox("Reussi", "le compte est bien saisi")
