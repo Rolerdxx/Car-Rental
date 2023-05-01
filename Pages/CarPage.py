@@ -1,9 +1,9 @@
 from PyQt5.uic import loadUi
-from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QDialog
-from Helpers.ImageLabel import getImageLabel
 from PyQt5.QtGui import QPixmap
-from Pages.reservation import reservationPage
+from Pages.reservation import ReservationDialog
+
+
 class CarPage(QDialog):
     def __init__(self, main):
         super(CarPage, self).__init__()
@@ -27,15 +27,15 @@ class CarPage(QDialog):
         self.placeslabel.setText(str(self.car[5]))
         self.transmissionlabel.setText(self.car[6])
         self.statelabel.setText(str(self.car[7]))
-        self.pricelabel.setText(str(self.car[8])+" DH")
+        self.pricelabel.setText(str(self.car[8]) + " DH")
 
-    def reserveit(self,userid):
-        state=self.statelabel.text()
-        price=self.pricelabel.text()
-        carid=self.car[0]
-        reservationPage.reserveIt(carid,userid,price)
-        if state=="1":
-            self.Dialog = QtWidgets.QDialog()
-            self.ui = reservationPage()
-            self.ui.setupUi(self.Dialog)
-            self.Dialog.show()
+    def reserveit(self):
+        state = self.statelabel.text()
+        if state == "1":
+            revdialog = ReservationDialog()
+            res = revdialog.exec()
+            if res:
+                print("Days", revdialog.getDays())
+                print("User", self.main.currentuser)
+                print("Car id", self.car[0])
+                # Reserviha hna

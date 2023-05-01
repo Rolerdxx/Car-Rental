@@ -7,7 +7,6 @@ from Pages.LoginPage import LoginDialog
 from Pages.CarPage import CarPage
 from Helpers.ImageLabel import getImageLabel
 import bcrypt
-from PyQt5 import QtCore
 
 # Class dyal main page
 
@@ -110,7 +109,7 @@ class MainWindow(QDialog):
                 hashed = user[4][2:-1]
                 hashed = hashed.encode('utf-8')
                 if bcrypt.checkpw(password, hashed):
-                    currentuser = user
+                    self.currentuser = user
                     self.loginbutton.move(1500, 1500)
                     txt = "Good Morning " + user[2] + " " + user[1] + "!"
                     self.label.setText(txt)
@@ -123,5 +122,3 @@ class MainWindow(QDialog):
         self.tableWidget.clear()
         self.tableWidget.setRowCount(0)
         self.tableWidget.setHorizontalHeaderLabels(['id','image', 'marque', 'modele', 'carburant', 'places', 'transmission', 'State', 'Prix Par Jour'])
-def Reservation():
-        CarPage.reserveit(userid)
