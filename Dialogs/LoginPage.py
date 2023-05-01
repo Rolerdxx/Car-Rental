@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QDialog
 from Dialogs.CodeSender import CodeSenderDialog
 from Dialogs.EmailGetter import EmailGetterDialog
 from Helpers.MessageBox import msgbox
-from Pages.ChangePassPage import ChangePassDialog
+from Dialogs.ChangePassPage import ChangePassDialog
 
 
 # class dyal login dialog

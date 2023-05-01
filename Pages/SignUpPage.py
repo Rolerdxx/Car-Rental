@@ -5,7 +5,7 @@ from PyQt5.uic import loadUi
 from PyQt5.QtWidgets import QDialog
 from PyQt5 import QtWidgets
 
-from Pages.MessageBox import msgbox
+from Helpers.MessageBox import msgbox
 
 
 class SignupWindow(QDialog):
@@ -24,7 +24,7 @@ class SignupWindow(QDialog):
         bytess = self.mdpline.text().encode('utf-8')
         salt = bcrypt.gensalt()
         hashh = bcrypt.hashpw(bytess, salt)
-        data.append(str(hashh))
+        data.append(str(hashh)[2:-1])
         return data
 
     def passwordvalidation(self):
@@ -46,6 +46,5 @@ class SignupWindow(QDialog):
         elif sipassword.isupper():
             msgbox("Erreur", "mot de passe doit contenir des miniscules")
         else:
-
             self.accept()
 

@@ -1,26 +1,19 @@
 from PyQt5.uic import loadUi
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QDialog
-
-from Controllers.User_Controller import Signup
 from Database.CarRental_database import CarRentalDB
 from Helpers.MessageBox import msgbox
-from Pages.LoginPage import LoginDialog
+from Dialogs.LoginPage import LoginDialog
 from Pages.CarPage import CarPage
 from Helpers.ImageLabel import getImageLabel
-import bcrypt
-from PyQt5 import QtCore
 from Pages.SignUpPage import SignupWindow
-from PyQt5.QtGui import QPixmap
 import bcrypt
-import re
 
 
-# Class dyal main page
 
 
 class MainWindow(QDialog):
-    def __init__(self, widget):  # Hada constructor hadchi hna kayexecuta fach kat7el l page
+    def __init__(self, widget):
         super(MainWindow, self).__init__()
         loadUi("./UI/tabw.ui", self)
         self.widget = widget
@@ -32,20 +25,19 @@ class MainWindow(QDialog):
         # self.tableWidget.setColumnWidth(0,250)
         self.loaddata()
         self.loadparametrs()
-        self.Filter.clicked.connect(self.filter)  # connect Filter button m3a fonction dyalha
-        self.loginbutton.clicked.connect(self.login)  # connect login button m3a fonction dyalha
+        self.Filter.clicked.connect(self.filter)
+        self.loginbutton.clicked.connect(self.login)
         self.tableWidget.itemClicked.connect(self.select)
         self.reserveButton.clicked.connect(self.switchpage)
         self.Signupbtnpush.clicked.connect(self.signupfunction)
 
-
-    def loaddata(self):  # fonction katjib ga3 cars mn database o kat afichihom f tableWidget
+    def loaddata(self):
         self.cars = self.db.getallcars()
         self.showdata(self.cars)
 
     def loaddata2(self, marque, modele, carburant, place, transmission, prix):
-        cars2 = self.db.getsomecars(marque, modele, carburant, place, transmission, prix)
-        self.showdata(cars2)
+        self.cars = self.db.getsomecars(marque, modele, carburant, place, transmission, prix)
+        self.showdata(self.cars)
 
     def loadparametrs(self):
         marque = self.marque
@@ -61,7 +53,7 @@ class MainWindow(QDialog):
         for choice in carburants:
             carburant.addItem(choice[0])
 
-    def showdata(self, cars):  # had fonction katched cars li jawha f parametre o kataffechihom f table
+    def showdata(self, cars):
         for row_number, row_data in enumerate(cars):
             self.tableWidget.insertRow(row_number)
             for column_number, column_data in enumerate(row_data):
@@ -107,8 +99,6 @@ class MainWindow(QDialog):
         logdialog.setFixedHeight(400)
         logdialog.setFixedWidth(711)
         logdialog.setWindowTitle("Login Page")
-       # logdialog.setWindowFlags(QtCore.Qt.FramelessWindowHint)
-        #logdialog.setAttribute(QtCore.Qt.WA_TranslucentBackground)
         response = logdialog.exec()
         if response:
             email = logdialog.getemail()
@@ -116,11 +106,12 @@ class MainWindow(QDialog):
             user = self.db.login(email)
             if user:
                 password = password.encode('utf-8')
-                hashed = user[4][2:-1]
+                hashed = user[4]
                 hashed = hashed.encode('utf-8')
                 if bcrypt.checkpw(password, hashed):
-                    currentuser = user
+                    self.currentuser = user
                     self.loginbutton.move(1500, 1500)
+                    self.Signupbtnpush.move(1500, 1500)
                     txt = "Good Morning " + user[2] + " " + user[1] + "!"
                     self.label.setText(txt)
                 else:
@@ -128,11 +119,11 @@ class MainWindow(QDialog):
             else:
                 msgbox("Login", "Cannot login")
 
-
     def cleartable(self):
         self.tableWidget.clear()
         self.tableWidget.setRowCount(0)
-        self.tableWidget.setHorizontalHeaderLabels(['image', 'marque', 'modele', 'carburant', 'places', 'transmission', 'State', 'Prix Par Jour'])
+        self.tableWidget.setHorizontalHeaderLabels(
+            ['image', 'marque', 'modele', 'carburant', 'places', 'transmission', 'State', 'Prix Par Jour'])
 
     def signupfunction(self):
         signupdialog = SignupWindow()
@@ -140,7 +131,5 @@ class MainWindow(QDialog):
         if response:
             data = signupdialog.datagets()
             self.db.Signup(data)
+            self.db.commit()
             msgbox("Compte bien creér", "Votre compte est bien Enregistré")
-
-
-
