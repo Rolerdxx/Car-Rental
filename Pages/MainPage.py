@@ -1,6 +1,8 @@
 from PyQt5.uic import loadUi
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QDialog
+
+from Controllers.User_Controller import Signup
 from Database.CarRental_database import CarRentalDB
 from Helpers.MessageBox import msgbox
 from Pages.LoginPage import LoginDialog
@@ -8,6 +10,11 @@ from Pages.CarPage import CarPage
 from Helpers.ImageLabel import getImageLabel
 import bcrypt
 from PyQt5 import QtCore
+from Pages.SignUpPage import SignupWindow
+from PyQt5.QtGui import QPixmap
+import bcrypt
+import re
+
 
 # Class dyal main page
 
@@ -29,6 +36,8 @@ class MainWindow(QDialog):
         self.loginbutton.clicked.connect(self.login)  # connect login button m3a fonction dyalha
         self.tableWidget.itemClicked.connect(self.select)
         self.reserveButton.clicked.connect(self.switchpage)
+        self.Signupbtnpush.clicked.connect(self.signupfunction)
+
 
     def loaddata(self):  # fonction katjib ga3 cars mn database o kat afichihom f tableWidget
         self.cars = self.db.getallcars()
@@ -119,7 +128,19 @@ class MainWindow(QDialog):
             else:
                 msgbox("Login", "Cannot login")
 
+
     def cleartable(self):
         self.tableWidget.clear()
         self.tableWidget.setRowCount(0)
         self.tableWidget.setHorizontalHeaderLabels(['image', 'marque', 'modele', 'carburant', 'places', 'transmission', 'State', 'Prix Par Jour'])
+
+    def signupfunction(self):
+        signupdialog = SignupWindow()
+        response = signupdialog.exec()
+        if response:
+            data = signupdialog.datagets()
+            self.db.Signup(data)
+            msgbox("Compte bien creér", "Votre compte est bien Enregistré")
+
+
+

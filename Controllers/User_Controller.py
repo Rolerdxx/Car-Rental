@@ -5,6 +5,7 @@ def login(db, email):
     return mycursor.fetchone()
 
 
+
 def changepassword(db, email, newpass):
     cursor = db.cursor()
     query = "UPDATE userr SET passwordEn = '"+newpass[2:-1]+"' WHERE email = '"+email+"'"
@@ -14,3 +15,9 @@ def changepassword(db, email, newpass):
     except db.Error as err:
         print("Something went wrong: {}".format(err))
     return cursor.rowcount
+
+def Signup(db, data):
+    mycursor = db.cursor()
+    query = "INSERT INTO userr (nom,prenom,email,passwordEn) VALUES(%s, %s, %s, %s)"
+    mycursor.execute(query, data)
+
