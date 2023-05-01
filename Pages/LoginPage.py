@@ -17,7 +17,7 @@ class LoginDialog(QDialog):
         self.user = None
         self.db = db
 
-    # hado katjib bihom data l window lhra
+    # hado katjib bihom data l window lkhra
     def getemail(self):
         return self.emailline.text()
 
