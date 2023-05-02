@@ -337,7 +337,7 @@ width:35px</string>
      <string>Good Morning Guest!</string>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>700</x>
@@ -358,7 +358,7 @@ width:35px</string>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_2">
+      <widget class="QPushButton" name="Signupbtnpush">
        <property name="styleSheet">
         <string notr="true">height:30px;</string>
        </property>
@@ -372,8 +372,6 @@ width:35px</string>
   </widget>
   <zorder>frame</zorder>
   <zorder>tableWidget</zorder>
-  <zorder>loginbutton</zorder>
-  <zorder>pushButton_2</zorder>
   <zorder>reserveButton</zorder>
  </widget>
  <resources>

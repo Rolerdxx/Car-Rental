@@ -1,5 +1,10 @@
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
+import os
+from dotenv import find_dotenv, load_dotenv
+
+dotenv_path = find_dotenv()
+load_dotenv(dotenv_path)
 
 
 def SendEmail(towho, subject, message):
@@ -8,5 +13,5 @@ def SendEmail(towho, subject, message):
         to_emails=towho,
         subject=subject,
         html_content=message)
-    sg = SendGridAPIClient('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')
+    sg = SendGridAPIClient(api_key=os.getenv("emailkey"))
     sg.send(message)

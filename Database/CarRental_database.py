@@ -2,6 +2,8 @@ import mysql.connector
 from Controllers.User_Controller import login, changepassword
 from Controllers.Car_Controller import getallcars, getsomecars
 from Controllers.parametres_controller import getallmarques, getallcarburants, getalltransmissions
+from Controllers.User_Controller import Signup
+
 
 
 class CarRentalDB:
@@ -12,11 +14,15 @@ class CarRentalDB:
         database="carrental"
     )
 
+    def commit(self):
+        self.db.commit()
+
     def login(self, email):
         return login(self.db, email)
 
     def getallcars(self):
         return getallcars(self.db)
+
 
     def getsomecars(self, marque, modele, carburant, place, transmission, prix):
         return getsomecars(self.db, marque, modele, carburant, place, transmission, prix)
@@ -32,3 +38,7 @@ class CarRentalDB:
 
     def changepass(self, email, newpass):
         return changepassword(self.db, email, newpass)
+
+    def Signup(self, data):
+        return Signup(self.db, data)
+
