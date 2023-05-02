@@ -374,7 +374,7 @@ width:60px</string>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_2">
+      <widget class="QPushButton" name="Signupbtnpush">
        <property name="styleSheet">
         <string notr="true">height:30px;</string>
        </property>
