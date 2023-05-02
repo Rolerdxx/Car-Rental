@@ -10,8 +10,6 @@ from Pages.SignUpPage import SignupWindow
 import bcrypt
 
 
-
-
 class MainWindow(QDialog):
     def __init__(self, widget):
         super(MainWindow, self).__init__()
@@ -22,7 +20,6 @@ class MainWindow(QDialog):
         self.carpagecounter = 0
         self.cars = []
         self.selected = None
-        # self.tableWidget.setColumnWidth(0,250)
         self.loaddata()
         self.loadparametrs()
         self.Filter.clicked.connect(self.filter)
@@ -88,11 +85,18 @@ class MainWindow(QDialog):
         self.selected = self.tableWidget.currentRow()
 
     def switchpage(self):
-        if self.selected is not None:
-            carpage = CarPage(self)
-            self.carpagecounter += 1
-            self.widget.addWidget(carpage)
-            self.widget.setCurrentIndex(self.carpagecounter)
+        if self.currentuser != "Guest":
+            if self.selected is not None:
+                carpage = CarPage(self)
+                self.carpagecounter += 1
+                self.widget.addWidget(carpage)
+                self.widget.setCurrentIndex(self.carpagecounter)
+            else:
+                msgbox("Error", "Select a car")
+        else:
+            msgbox("Error", "You have to sign in")
+
+
     def login(self):
         logdialog = LoginDialog(db=self.db)
         logdialog.setFixedHeight(400)
@@ -124,7 +128,7 @@ class MainWindow(QDialog):
         self.tableWidget.clear()
         self.tableWidget.setRowCount(0)
         self.tableWidget.setHorizontalHeaderLabels(
-            ['image', 'marque', 'modele', 'carburant', 'places', 'transmission', 'State', 'Prix Par Jour'])
+            ['Id', 'Image', 'Marque', 'Modele', 'Carburant', 'Places', 'Transmission', 'State', 'Price per day'])
 
     def signupfunction(self):
         signupdialog = SignupWindow()
@@ -134,4 +138,3 @@ class MainWindow(QDialog):
             self.db.Signup(data)
             self.db.commit()
             msgbox("Compte bien creér", "Votre compte est bien Enregistré")
-
