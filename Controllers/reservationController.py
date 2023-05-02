@@ -1,3 +1,4 @@
+from datetime import datetime,timedelta
 def savereservation(db,carid,userid,priceperday,nbrDays):
     print("khdama tahua")
     cursor = db.cursor()
@@ -7,3 +8,16 @@ def savereservation(db,carid,userid,priceperday,nbrDays):
     db.commit()
 def calculTotalPrice(nbrDays,prixperday):
     return nbrDays*prixperday
+
+def getDayOfResevationEnd(db,carid):
+    cursor = db.cursor()
+    sql=f"select nbrDays,DATE_FORMAT(date, '%d-%m-%Y') from reservation where idvoiture={carid}"
+    cursor.execute(sql)
+    table=cursor.fetchall()
+    if len(table)!= 0 :
+        date=table[0][1]
+        nbrDays=table[0][0]
+        dateFN = datetime.strptime(date, '%d-%m-%Y').date()
+        newDateFN = dateFN + timedelta(days=nbrDays)
+        return newDateFN
+

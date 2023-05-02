@@ -30,6 +30,11 @@ class MainWindow(QDialog):
 
     def loaddata(self):
         self.cars = self.db.getallcars()
+        carids = [self.cars[0] for self.cars in self.cars]
+        print(carids)
+        for car in carids:
+            self.db.checkCarState(int(car))
+        self.cars = self.db.getallcars()
         self.showdata(self.cars)
 
     def loaddata2(self, marque, modele, carburant, place, transmission, prix):
