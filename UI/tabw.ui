@@ -81,37 +81,37 @@ QTableView::item:selected {
    </attribute>
    <column>
     <property name="text">
-     <string>id</string>
+     <string>Id</string>
     </property>
    </column>
    <column>
     <property name="text">
-     <string>image</string>
+     <string>Image</string>
     </property>
    </column>
    <column>
     <property name="text">
-     <string>marque</string>
+     <string>Marque</string>
     </property>
    </column>
    <column>
     <property name="text">
-     <string>modele</string>
+     <string>Modele</string>
     </property>
    </column>
    <column>
     <property name="text">
-     <string>carburant</string>
+     <string>Carburant</string>
     </property>
    </column>
    <column>
     <property name="text">
-     <string>places</string>
+     <string>Places</string>
     </property>
    </column>
    <column>
     <property name="text">
-     <string>transmission</string>
+     <string>Transmission</string>
     </property>
    </column>
    <column>
@@ -121,7 +121,7 @@ QTableView::item:selected {
    </column>
    <column>
     <property name="text">
-     <string>Prix Par Jour</string>
+     <string>Price per day</string>
     </property>
    </column>
   </widget>
@@ -374,7 +374,7 @@ width:60px</string>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_2">
+      <widget class="QPushButton" name="Signupbtnpush">
        <property name="styleSheet">
         <string notr="true">height:30px;</string>
        </property>

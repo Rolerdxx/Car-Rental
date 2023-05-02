@@ -1,5 +1,5 @@
 from PyQt5.uic import loadUi
-from PyQt5.QtWidgets import QDialog
+from PyQt5.QtWidgets import QDialog, QLineEdit
 from Helpers.MessageBox import msgbox
 import bcrypt
 
@@ -10,6 +10,8 @@ class ChangePassDialog(QDialog):
         loadUi("./UI/changepass_D.ui", self)
         self.db = db
         self.email = email
+        self.passline.setEchoMode(QLineEdit.Password)
+        self.conline.setEchoMode(QLineEdit.Password)
         self.changep.clicked.connect(self.changepass)
         self.cancelp.clicked.connect(self.reject)
 
@@ -24,5 +26,6 @@ class ChangePassDialog(QDialog):
             salt = bcrypt.gensalt()
             hashh = bcrypt.hashpw(bytess, salt)
             res = self.db.changepass(self.email, str(hashh))
+            self.db.commit()
             if res > 0:
                 self.accept()

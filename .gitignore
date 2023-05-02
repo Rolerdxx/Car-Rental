@@ -64,3 +64,4 @@ resource.py
 sendgrid.env
 main.spec
 .env
+

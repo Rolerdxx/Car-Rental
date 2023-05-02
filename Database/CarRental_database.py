@@ -1,17 +1,26 @@
 import mysql.connector
 from datetime import datetime
 from Controllers.User_Controller import login, changepassword
-from Controllers.Car_Controller import getallcars, getsomecars
-from Controllers.parametres_controller import getallmarques, getallcarburants, getalltransmissions
+from Controllers.Car_Controller import getallcars, getsomecars, getallmarques, getallcarburants, getalltransmissions
+
+from Controllers.User_Controller import Signup
+
 from Controllers.Car_Controller import changestate
+
 from Controllers.reservationController import savereservation,getDayOfResevationEnd
+
+
+
 class CarRentalDB:
     db = mysql.connector.connect(
         host="localhost",
         user="root",
-        password="",
+        password="root",
         database="carrental"
     )
+
+    def commit(self):
+        self.db.commit()
 
     def login(self, email):
         return login(self.db, email)
@@ -34,6 +43,8 @@ class CarRentalDB:
     def changepass(self, email, newpass):
         return changepassword(self.db, email, newpass)
 
+    def Signup(self, data):
+        return Signup(self.db, data)
 
     def reservation(self,carid,userid,priceperday,nbrDays):
         changestate(self.db,carid,True)
@@ -46,3 +57,4 @@ class CarRentalDB:
                 changestate(self.db,carid,False)
             else:
                 print("car reserved !!!")
+
