@@ -36,7 +36,6 @@ class CarPage(QDialog):
         self.pricelabel.setText(str(self.car[8]) + " DH")
 
     def reserveit(self):
-
         state = str(self.car[7])
         if state == "1":
             revdialog = ReservationDialog()
