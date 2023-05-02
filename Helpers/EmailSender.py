@@ -14,5 +14,4 @@ def SendEmail(towho, subject, message):
         subject=subject,
         html_content=message)
     sg = SendGridAPIClient(api_key=os.getenv("emailkey"))
-    response = sg.send(message)
-    print(response.status_code, response.body, response.headers)
+    sg.send(message)

@@ -1,11 +1,10 @@
 import re
-
 import bcrypt
 from PyQt5.uic import loadUi
 from PyQt5.QtWidgets import QDialog
 from PyQt5 import QtWidgets
-
 from Helpers.MessageBox import msgbox
+from Dialogs.CodeSender import CodeSenderDialog
 
 
 class SignupWindow(QDialog):
@@ -39,12 +38,20 @@ class SignupWindow(QDialog):
             msgbox("Erreur", "prenom vide")
         elif not re.match(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+', simail):
             msgbox("Erreur", "forme email invalid")
-        elif len(sipassword) <= 8:
-            msgbox("Erreur", "mot de passe moin de 9 car")
+        elif len(sipassword) < 8:
+            msgbox("Erreur", "mot de passe moin de 8 car")
         elif sipassword.isdigit():
             msgbox("Erreur", "mot de passe doit contenir lettres")
         elif sipassword.isupper():
             msgbox("Erreur", "mot de passe doit contenir des miniscules")
         else:
-            self.accept()
+            emailveri = CodeSenderDialog(email=simail)
+            res = emailveri.exec()
+            if res:
+                if emailveri.getcode() == emailveri.getcodeentered():
+                    self.accept()
+                else:
+                    msgbox("Error", "Wrong code")
+            else:
+                self.reject()
 
