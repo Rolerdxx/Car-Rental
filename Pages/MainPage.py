@@ -58,10 +58,10 @@ class MainWindow(QDialog):
             self.tableWidget.insertRow(row_number)
             for column_number, column_data in enumerate(row_data):
                 item = str(column_data)
-                if column_number == 0:
+                if column_number == 1:
                     item = getImageLabel(self, column_data)
                     self.tableWidget.setCellWidget(row_number, column_number, item)
-                elif column_number == 6:
+                elif column_number == 7:
                     if item == "1":
                         self.tableWidget.setItem(row_number, column_number, QtWidgets.QTableWidgetItem("Available"))
                     else:
@@ -93,7 +93,6 @@ class MainWindow(QDialog):
             self.carpagecounter += 1
             self.widget.addWidget(carpage)
             self.widget.setCurrentIndex(self.carpagecounter)
-
     def login(self):
         logdialog = LoginDialog(db=self.db)
         logdialog.setFixedHeight(400)
@@ -104,6 +103,8 @@ class MainWindow(QDialog):
             email = logdialog.getemail()
             password = logdialog.getpassword()
             user = self.db.login(email)
+            global userid
+            userid = user[0]
             if user:
                 password = password.encode('utf-8')
                 hashed = user[4]
@@ -133,3 +134,4 @@ class MainWindow(QDialog):
             self.db.Signup(data)
             self.db.commit()
             msgbox("Compte bien creér", "Votre compte est bien Enregistré")
+

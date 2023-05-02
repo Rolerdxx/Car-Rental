@@ -1,33 +1,32 @@
 def getallcars(db):
     mycursor = db.cursor()
-    mycursor.execute("SELECT image,marque,modele,carburant,places,transmission,state,prixParJour FROM voiture")
+    mycursor.execute("SELECT id,image,marque,modele,carburant,places,transmission,state,prixParJour FROM voiture")
     return mycursor.fetchall()
 
 
 def getsomecars(db, marque, modele, carburant, place, transmission, prix):
     mycursor = db.cursor()
-    sql = "SELECT image,marque,modele,carburant,places,transmission,state,prixParJour FROM voiture WHERE"
-    values = []
+    sql = "SELECT id,image,marque,modele,carburant,places,transmission,state,prixParJour FROM voiture WHERE"
     if marque != "none":
-        sql += " marque=%s AND"
-        print(marque)
-        values.append(marque)
+        sql += f" lower(marque) like '{marque.lower()}' AND"
     if modele != "":
-        sql += " modele = %s AND"
-        values.append(modele)
+        sql += f" lower(modele) like '{modele.lower()}' AND"
     if carburant != "none":
-        sql += " carburant = %s AND"
-        values.append(carburant)
+        sql += f" lower(carburant) like '{carburant.lower()}' AND"
     if place != "":
-        sql += " places = %s AND"
-        values.append(int(place))
+        sql += f" lower(places) like '{place.lower()}' AND"
     if transmission != "none":
-        sql += " transmission = %s AND"
-        values.append(transmission)
+        sql += f" lower(transmission) like '{transmission.lower()}' AND"
     if prix != "":
         sql += " prixParJour < %s AND"
-        values.append(float(prix))
     if sql.endswith("AND"):
         sql = sql[:-4]
-    mycursor.execute(sql, values)
+        print(sql)
+    mycursor.execute(sql)
     return mycursor.fetchall()
+def changestate(db,carid):
+    mycursor = db.cursor()
+    sql=f"UPDATE voiture SET state = '0' WHERE id ={carid}"
+    print(sql,carid,carid)
+    mycursor.execute(sql)
+    db.commit()
