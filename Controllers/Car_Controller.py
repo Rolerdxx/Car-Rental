@@ -24,9 +24,13 @@ def getsomecars(db, marque, modele, carburant, place, transmission, prix):
         print(sql)
     mycursor.execute(sql)
     return mycursor.fetchall()
-def changestate(db,carid):
+def changestate(db,carid,number):
     mycursor = db.cursor()
-    sql=f"UPDATE voiture SET state = '0' WHERE id ={carid}"
-    print(sql,carid,carid)
-    mycursor.execute(sql)
-    db.commit()
+    if number:
+        sql=f"UPDATE voiture SET state = '0' WHERE id ={carid}"
+        mycursor.execute(sql)
+        db.commit()
+    else:
+        sql=f"UPDATE voiture SET state = '1' WHERE id ={carid}"
+        mycursor.execute(sql)
+        db.commit()

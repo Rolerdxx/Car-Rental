@@ -30,6 +30,7 @@ class CarPage(QDialog):
         self.pricelabel.setText(str(self.car[8]) + " DH")
 
     def reserveit(self):
+        carid = self.car[0]
         state = self.statelabel.text()
         if state == "1":
             revdialog = ReservationDialog()
@@ -37,7 +38,6 @@ class CarPage(QDialog):
             if res:
                 days=revdialog.getDays()
                 user=self.main.currentuser[0]
-                carid=self.car[0]
                 priceperday=self.car[8]
                 print("Days", days)
                 print("User",user )

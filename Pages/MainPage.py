@@ -22,6 +22,7 @@ class MainWindow(QDialog):
         self.cars = []
         self.selected = None
         # self.tableWidget.setColumnWidth(0,250)
+
         self.loaddata()
         self.loadparametrs()
         self.Filter.clicked.connect(self.filter)  # connect Filter button m3a fonction dyalha
@@ -29,6 +30,11 @@ class MainWindow(QDialog):
         self.tableWidget.itemClicked.connect(self.select)
         self.reserveButton.clicked.connect(self.switchpage)
     def loaddata(self):  # fonction katjib ga3 cars mn database o kat afichihom f tableWidget
+        self.cars = self.db.getallcars()
+        carids = [self.cars[0] for self.cars in self.cars]
+        print(carids)
+        for car in carids:
+            self.db.checkCarState(int(car))
         self.cars = self.db.getallcars()
         self.showdata(self.cars)
 

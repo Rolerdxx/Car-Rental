@@ -1,9 +1,10 @@
 import mysql.connector
+from datetime import datetime
 from Controllers.User_Controller import login, changepassword
 from Controllers.Car_Controller import getallcars, getsomecars
 from Controllers.parametres_controller import getallmarques, getallcarburants, getalltransmissions
 from Controllers.Car_Controller import changestate
-from Controllers.reservationController import savereservation
+from Controllers.reservationController import savereservation,getDayOfResevationEnd
 class CarRentalDB:
     db = mysql.connector.connect(
         host="localhost",
@@ -35,6 +36,13 @@ class CarRentalDB:
 
 
     def reservation(self,carid,userid,priceperday,nbrDays):
-        print("khdama")
-        changestate(self.db,carid)
+        changestate(self.db,carid,True)
         return savereservation(self.db,carid,userid,priceperday,nbrDays)
+    def checkCarState(self,carid):
+        dateFN=getDayOfResevationEnd(self.db,carid)
+        if dateFN :
+            currentDate = datetime.now().date()
+            if currentDate >= dateFN:
+                changestate(self.db,carid,False)
+            else:
+                print("car reserved !!!")
