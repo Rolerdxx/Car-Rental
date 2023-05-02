@@ -24,7 +24,7 @@
    <property name="geometry">
     <rect>
      <x>50</x>
-     <y>180</y>
+     <y>190</y>
      <width>971</width>
      <height>381</height>
     </rect>
@@ -148,8 +148,7 @@ QTableView::item:selected {
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">
-border-image: url(:/newPrefix/images/mainimage.jpg);</string>
+    <string notr="true"/>
    </property>
    <property name="frameShape">
     <enum>QFrame::StyledPanel</enum>
@@ -163,7 +162,7 @@ border-image: url(:/newPrefix/images/mainimage.jpg);</string>
       <x>50</x>
       <y>150</y>
       <width>971</width>
-      <height>31</height>
+      <height>36</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
@@ -181,11 +180,12 @@ font-weight:bold;</string>
      <item>
       <widget class="QComboBox" name="marque">
        <property name="styleSheet">
-        <string notr="true">background-color:#036161;
+        <string notr="true">background-color:rgba(3, 97, 97, 0.5);
 color: white;
 font-weight:bold;
-border: solid 0px;
-height:20px</string>
+border:solid 0px;
+border-bottom:2px solid black;
+height:25px;</string>
        </property>
        <item>
         <property name="text">
@@ -207,11 +207,12 @@ height:20px</string>
      <item>
       <widget class="QComboBox" name="transmission">
        <property name="styleSheet">
-        <string notr="true">background-color:#036161;
+        <string notr="true">background-color:rgba(3, 97, 97, 0.5);
 color: white;
 font-weight:bold;
-border: solid 0px;
-height:20px</string>
+border:solid 0px;
+border-bottom:2px solid black;
+height:25px;</string>
        </property>
        <item>
         <property name="text">
@@ -234,11 +235,12 @@ font-weight:bold;</string>
      <item>
       <widget class="QComboBox" name="carburant">
        <property name="styleSheet">
-        <string notr="true">background-color:#036161;
+        <string notr="true">background-color:rgba(3, 97, 97, 0.5);
 color: white;
 font-weight:bold;
-border: solid 0px;
-height:20px</string>
+border:solid 0px;
+border-bottom:2px solid black;
+height:25px;</string>
        </property>
        <item>
         <property name="text">
@@ -260,10 +262,12 @@ height:20px</string>
      <item>
       <widget class="QLineEdit" name="prix">
        <property name="styleSheet">
-        <string notr="true">background-color:#036161;
+        <string notr="true">background-color:rgba(3, 97, 97, 0.5);
 color: white;
 font-weight:bold;
-border:solid 0px</string>
+border:solid 0px;
+border-bottom:2px solid black;
+height:25px;</string>
        </property>
       </widget>
      </item>
@@ -280,10 +284,12 @@ border:solid 0px</string>
      <item>
       <widget class="QLineEdit" name="place">
        <property name="styleSheet">
-        <string notr="true">background-color:#036161;
+        <string notr="true">background-color:rgba(3, 97, 97, 0.5);
 color: white;
 font-weight:bold;
-border:solid 0px</string>
+border:solid 0px;
+border-bottom:2px solid black;
+height:25px;</string>
        </property>
       </widget>
      </item>
@@ -300,10 +306,12 @@ border:solid 0px</string>
      <item>
       <widget class="QLineEdit" name="modele">
        <property name="styleSheet">
-        <string notr="true">background-color:#036161;
+        <string notr="true">background-color:rgba(3, 97, 97, 0.5);
 color: white;
 font-weight:bold;
-border:solid 0px</string>
+border:solid 0px;
+border-bottom:2px solid black;
+height:25px;</string>
        </property>
       </widget>
      </item>
@@ -311,8 +319,8 @@ border:solid 0px</string>
       <widget class="QPushButton" name="Filter">
        <property name="styleSheet">
         <string notr="true">font-weight:bold;
-height:20px;
-width:35px</string>
+height:25px;
+width:60px</string>
        </property>
        <property name="text">
         <string>Filter</string>
@@ -324,22 +332,25 @@ width:35px</string>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>350</x>
+      <x>330</x>
       <y>40</y>
-      <width>311</width>
-      <height>41</height>
+      <width>371</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>Oswald Stencil</family>
-      <pointsize>18</pointsize>
+      <pointsize>16</pointsize>
       <weight>75</weight>
       <bold>true</bold>
      </font>
     </property>
     <property name="text">
      <string>Good Morning Guest!</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
    <widget class="QWidget" name="layoutWidget">

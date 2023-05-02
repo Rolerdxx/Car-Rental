@@ -6,30 +6,23 @@ def getallcars(db):
 
 def getsomecars(db, marque, modele, carburant, place, transmission, prix):
     mycursor = db.cursor()
-    sql = "SELECT image,marque,modele,carburant,places,transmission,state,prixParJour FROM voiture WHERE"
-    values = []
+    sql = "SELECT id,image,marque,modele,carburant,places,transmission,state,prixParJour FROM voiture WHERE"
     if marque != "none":
-        sql += " marque=%s AND"
-        print(marque)
-        values.append(marque)
+        sql += f" lower(marque) like '{marque.lower()}' AND"
     if modele != "":
-        sql += " lower(modele) like %s AND"
-        values.append(modele.lower())
+        sql += f" lower(modele) like '{modele.lower()}' AND"
     if carburant != "none":
-        sql += " carburant = %s AND"
-        values.append(carburant)
+        sql += f" lower(carburant) like '{carburant.lower()}' AND"
     if place != "":
-        sql += " places = %s AND"
-        values.append(int(place))
+        sql += f" lower(places) like '{place.lower()}' AND"
     if transmission != "none":
-        sql += " transmission = %s AND"
-        values.append(transmission)
+        sql += f" lower(transmission) like '{transmission.lower()}' AND"
     if prix != "":
         sql += " prixParJour < %s AND"
-        values.append(float(prix))
     if sql.endswith("AND"):
         sql = sql[:-4]
-    mycursor.execute(sql, values)
+        print(sql)
+    mycursor.execute(sql)
     return mycursor.fetchall()
 def changestate(db,carid):
     mycursor = db.cursor()
