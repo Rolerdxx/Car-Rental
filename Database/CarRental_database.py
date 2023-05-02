@@ -8,7 +8,7 @@ class CarRentalDB:
     db = mysql.connector.connect(
         host="localhost",
         user="root",
-        password="root",
+        password="",
         database="carrental"
     )
 
@@ -34,6 +34,7 @@ class CarRentalDB:
         return changepassword(self.db, email, newpass)
 
 
-    def reservation(self,ref,carid,userid,priceperday,dateDB,dateFN):
-        changestate(self.db,dateFN)
-        return savereservation(self.db,ref,carid,userid,priceperday,dateDB,dateFN)
+    def reservation(self,ref,carid,userid,priceperday,nbrDays):
+        print("khdama")
+        changestate(self.db,carid)
+        return savereservation(self.db,ref,carid,userid,priceperday,nbrDays)

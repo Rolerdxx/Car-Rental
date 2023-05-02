@@ -31,11 +31,8 @@ def getsomecars(db, marque, modele, carburant, place, transmission, prix):
         sql = sql[:-4]
     mycursor.execute(sql, values)
     return mycursor.fetchall()
-def changestate(db,dateFn):
+def changestate(db,carid):
     mycursor = db.cursor()
-    sql="UPDATE voiture SET state==0 where CURDATE()< %s"
-    value=(dateFn)
-    mycursor.execute(sql,value)
-    sql = "UPDATE voiture SET state==1 where CURDATE()> %s"
-    value = (dateFn)
-    mycursor.execute(sql, value)
+    sql="UPDATE `voiture` SET `state` = '0' WHERE `voiture`.`id` = %s"
+    print(sql)
+    mycursor.execute(sql,carid)
