@@ -2,10 +2,9 @@ from PyQt5.uic import loadUi
 from PyQt5.QtWidgets import QDialog
 from PyQt5.QtGui import QPixmap
 from Pages.reservation import ReservationDialog
-from Database.CarRental_database import CarRentalDB
+
 
 class CarPage(QDialog):
-    id=0
     def __init__(self, main):
         super(CarPage, self).__init__()
         loadUi("./UI/carpage.ui", self)
@@ -31,18 +30,16 @@ class CarPage(QDialog):
         self.pricelabel.setText(str(self.car[8]) + " DH")
 
     def reserveit(self):
-        CarPage.id+=1
         state = self.statelabel.text()
         if state == "1":
             revdialog = ReservationDialog()
             res = revdialog.exec()
             if res:
                 days=revdialog.getDays()
-                user=self.main.currentuser
+                user=self.main.currentuser[0]
                 carid=self.car[0]
                 priceperday=self.car[8]
                 print("Days", days)
                 print("User",user )
                 print("Car id", carid,priceperday)
-                self.db.reservation(CarPage.id,carid,user,priceperday,days)
-                # Reserviha hna
+                self.main.db.reservation(carid,user,priceperday,days)

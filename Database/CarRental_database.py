@@ -34,7 +34,7 @@ class CarRentalDB:
         return changepassword(self.db, email, newpass)
 
 
-    def reservation(self,ref,carid,userid,priceperday,nbrDays):
+    def reservation(self,carid,userid,priceperday,nbrDays):
         print("khdama")
         changestate(self.db,carid)
-        return savereservation(self.db,ref,carid,userid,priceperday,nbrDays)
+        return savereservation(self.db,carid,userid,priceperday,nbrDays)

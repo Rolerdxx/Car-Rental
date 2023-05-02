@@ -13,8 +13,8 @@ def getsomecars(db, marque, modele, carburant, place, transmission, prix):
         print(marque)
         values.append(marque)
     if modele != "":
-        sql += " modele = %s AND"
-        values.append(modele)
+        sql += " lower(modele) like %s AND"
+        values.append(modele.lower())
     if carburant != "none":
         sql += " carburant = %s AND"
         values.append(carburant)
@@ -33,6 +33,7 @@ def getsomecars(db, marque, modele, carburant, place, transmission, prix):
     return mycursor.fetchall()
 def changestate(db,carid):
     mycursor = db.cursor()
-    sql="UPDATE `voiture` SET `state` = '0' WHERE `voiture`.`id` = %s"
-    print(sql)
-    mycursor.execute(sql,carid)
+    sql=f"UPDATE voiture SET state = '0' WHERE id ={carid}"
+    print(sql,carid,carid)
+    mycursor.execute(sql)
+    db.commit()
