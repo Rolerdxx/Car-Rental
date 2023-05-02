@@ -10,8 +10,6 @@ from Pages.SignUpPage import SignupWindow
 import bcrypt
 
 
-
-
 class MainWindow(QDialog):
     def __init__(self, widget):
         super(MainWindow, self).__init__()
@@ -22,7 +20,6 @@ class MainWindow(QDialog):
         self.carpagecounter = 0
         self.cars = []
         self.selected = None
-        # self.tableWidget.setColumnWidth(0,250)
         self.loaddata()
         self.loadparametrs()
         self.Filter.clicked.connect(self.filter)
@@ -32,6 +29,11 @@ class MainWindow(QDialog):
         self.Signupbtnpush.clicked.connect(self.signupfunction)
 
     def loaddata(self):
+        self.cars = self.db.getallcars()
+        carids = [self.cars[0] for self.cars in self.cars]
+        print(carids)
+        for car in carids:
+            self.db.checkCarState(int(car))
         self.cars = self.db.getallcars()
         self.showdata(self.cars)
 
@@ -58,10 +60,10 @@ class MainWindow(QDialog):
             self.tableWidget.insertRow(row_number)
             for column_number, column_data in enumerate(row_data):
                 item = str(column_data)
-                if column_number == 0:
+                if column_number == 1:
                     item = getImageLabel(self, column_data)
                     self.tableWidget.setCellWidget(row_number, column_number, item)
-                elif column_number == 6:
+                elif column_number == 7:
                     if item == "1":
                         self.tableWidget.setItem(row_number, column_number, QtWidgets.QTableWidgetItem("Available"))
                     else:
@@ -88,11 +90,17 @@ class MainWindow(QDialog):
         self.selected = self.tableWidget.currentRow()
 
     def switchpage(self):
-        if self.selected is not None:
-            carpage = CarPage(self)
-            self.carpagecounter += 1
-            self.widget.addWidget(carpage)
-            self.widget.setCurrentIndex(self.carpagecounter)
+        if self.currentuser != "Guest":
+            if self.selected is not None:
+                carpage = CarPage(self)
+                self.carpagecounter += 1
+                self.widget.addWidget(carpage)
+                self.widget.setCurrentIndex(self.carpagecounter)
+            else:
+                msgbox("Error", "Select a car")
+        else:
+            msgbox("Error", "You have to sign in")
+
 
     def login(self):
         logdialog = LoginDialog(db=self.db)
@@ -104,6 +112,8 @@ class MainWindow(QDialog):
             email = logdialog.getemail()
             password = logdialog.getpassword()
             user = self.db.login(email)
+            global userid
+            userid = user[0]
             if user:
                 password = password.encode('utf-8')
                 hashed = user[4]
@@ -123,7 +133,7 @@ class MainWindow(QDialog):
         self.tableWidget.clear()
         self.tableWidget.setRowCount(0)
         self.tableWidget.setHorizontalHeaderLabels(
-            ['image', 'marque', 'modele', 'carburant', 'places', 'transmission', 'State', 'Prix Par Jour'])
+            ['Id', 'Image', 'Marque', 'Modele', 'Carburant', 'Places', 'Transmission', 'State', 'Price per day'])
 
     def signupfunction(self):
         signupdialog = SignupWindow()
