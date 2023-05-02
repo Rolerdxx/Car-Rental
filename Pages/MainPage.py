@@ -31,7 +31,6 @@ class MainWindow(QDialog):
     def loaddata(self):
         self.cars = self.db.getallcars()
         carids = [self.cars[0] for self.cars in self.cars]
-        print(carids)
         for car in carids:
             self.db.checkCarState(int(car))
         self.cars = self.db.getallcars()
@@ -142,4 +141,4 @@ class MainWindow(QDialog):
             data = signupdialog.datagets()
             self.db.Signup(data)
             self.db.commit()
-            msgbox("Compte bien creér", "Votre compte est bien Enregistré")
+            msgbox("Account Created", "Your account has been created!")
