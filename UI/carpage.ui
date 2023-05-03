@@ -41,10 +41,10 @@
   <widget class="QPushButton" name="backButton">
    <property name="geometry">
     <rect>
-     <x>490</x>
-     <y>480</y>
-     <width>181</width>
-     <height>81</height>
+     <x>590</x>
+     <y>490</y>
+     <width>131</width>
+     <height>61</height>
     </rect>
    </property>
    <property name="font">
@@ -59,14 +59,24 @@
     <string notr="true">font-weight:bold;
 font-family:Oswald Stencil;
 color:white;
-border : 0px;
+border : 1px;
 border-radius:5px;</string>
    </property>
    <property name="text">
-    <string>back to main page</string>
+    <string>  Back</string>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>../images/download.png</normaloff>../images/download.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>30</width>
+     <height>30</height>
+    </size>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>70</x>
@@ -238,7 +248,7 @@ color:black;</string>
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>450</x>
@@ -369,6 +379,44 @@ color:black;</string>
      </layout>
     </item>
    </layout>
+  </widget>
+  <widget class="QPushButton" name="reserveButton">
+   <property name="geometry">
+    <rect>
+     <x>750</x>
+     <y>490</y>
+     <width>121</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Oswald Stencil</family>
+     <pointsize>12</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font-weight:bold;
+font-family:Oswald Stencil;
+color:white;
+border : 0px;
+border-radius:5px;</string>
+   </property>
+   <property name="text">
+    <string>Reserve It</string>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>../images/reserver.png</normaloff>../images/reserver.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>30</width>
+     <height>30</height>
+    </size>
+   </property>
   </widget>
  </widget>
  <resources/>

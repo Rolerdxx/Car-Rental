@@ -22,91 +22,123 @@
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>100</x>
+     <x>15</x>
      <y>20</y>
-     <width>166</width>
+     <width>331</width>
      <height>25</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <pointsize>16</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
     </font>
    </property>
-   <property name="text">
-    <string>Change Password</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>70</y>
-     <width>91</width>
-     <height>16</height>
-    </rect>
+   <property name="styleSheet">
+    <string notr="true">font-weight:bold
+</string>
    </property>
    <property name="text">
-    <string>New Password:</string>
+    <string>Password Reset</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
    </property>
   </widget>
   <widget class="QLineEdit" name="passline">
    <property name="geometry">
     <rect>
-     <x>130</x>
+     <x>80</x>
      <y>70</y>
      <width>201</width>
-     <height>20</height>
+     <height>31</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color:rgba(3, 97, 97, 0.5);
+color: white;
+font-weight:bold;
+border:solid 0px;
+border-bottom:2px solid white;
+height:25px;</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="placeholderText">
+    <string>New Password</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="conline">
    <property name="geometry">
     <rect>
-     <x>130</x>
-     <y>120</y>
+     <x>80</x>
+     <y>130</y>
      <width>201</width>
-     <height>20</height>
+     <height>31</height>
     </rect>
    </property>
-  </widget>
-  <widget class="QLabel" name="label_2">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>120</y>
-     <width>71</width>
-     <height>16</height>
-    </rect>
+   <property name="styleSheet">
+    <string notr="true">background-color:rgba(3, 97, 97, 0.5);
+color: white;
+font-weight:bold;
+border:solid 0px;
+border-bottom:2px solid white;
+height:25px;
+</string>
    </property>
-   <property name="text">
-    <string>Confirmation:</string>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="placeholderText">
+    <string>New Password Confirmation</string>
    </property>
   </widget>
   <widget class="QPushButton" name="changep">
    <property name="geometry">
     <rect>
-     <x>90</x>
-     <y>180</y>
+     <x>50</x>
+     <y>190</y>
      <width>101</width>
      <height>31</height>
     </rect>
    </property>
    <property name="text">
-    <string>Change Password</string>
+    <string>Submit</string>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>../images/check.png</normaloff>../images/check.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>30</width>
+     <height>30</height>
+    </size>
    </property>
   </widget>
   <widget class="QPushButton" name="cancelp">
    <property name="geometry">
     <rect>
      <x>210</x>
-     <y>180</y>
+     <y>190</y>
      <width>101</width>
      <height>31</height>
     </rect>
    </property>
    <property name="text">
     <string>cancel</string>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>../images/x.png</normaloff>../images/x.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>30</width>
+     <height>30</height>
+    </size>
    </property>
   </widget>
  </widget>

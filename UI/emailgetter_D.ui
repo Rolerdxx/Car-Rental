@@ -35,27 +35,34 @@
     <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
    </property>
   </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>50</y>
-     <width>80</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Type Your Email:</string>
-   </property>
-  </widget>
   <widget class="QLineEdit" name="emailline">
    <property name="geometry">
     <rect>
-     <x>130</x>
-     <y>50</y>
-     <width>201</width>
-     <height>20</height>
+     <x>30</x>
+     <y>39</y>
+     <width>301</width>
+     <height>31</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color:rgba(3, 97, 97, 0.5);
+color: white;
+font-weight:bold;
+border:solid 0px;border-bottom:2px solid white;
+height:25px;</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="placeholderText">
+    <string>Type your Email</string>
    </property>
   </widget>
  </widget>

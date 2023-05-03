@@ -2,13 +2,13 @@ import sys
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QApplication
 from PyQt5 import QtGui
-# import pyqtcss
+import pyqtcss
 from Pages.MainPage import MainWindow
 
-
-style = open("./styles/QSS/MacOS.qss", "r")
+style = open("./styles/QSS/AMOLED.qss", "r")
 stylesheet = style.read()
-# style_string = pyqtcss.get_style("dark_orange")
+style_string = pyqtcss.get_style("dark_orange")
+65
 app = QApplication(sys.argv)
 app.setStyleSheet(stylesheet)
 widget = QtWidgets.QStackedWidget()
