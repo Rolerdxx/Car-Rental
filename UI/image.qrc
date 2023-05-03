@@ -1,7 +1,14 @@
 <RCC>
   <qresource prefix="newPrefix">
-    <file>../images/login.jpg</file>
-    <file>../images/mainimage.jpg</file>
-    <file>../images/signuppage.jpg</file>
+    <file>2998879.png</file>
+    <file>6133890.png</file>
+    <file>check.png</file>
+    <file>icon0.png</file>
+    <file>login.jpg</file>
+    <file>mainimage.jpg</file>
+    <file>reserver.png</file>
+    <file>search.png</file>
+    <file>signuppage.jpg</file>
+    <file>x.png</file>
   </qresource>
 </RCC>

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>378</width>
-    <height>204</height>
+    <width>358</width>
+    <height>209</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -43,6 +43,10 @@
    <property name="text">
     <string>Yes</string>
    </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>../images/check.png</normaloff>../images/check.png</iconset>
+   </property>
   </widget>
   <widget class="QPushButton" name="no">
    <property name="geometry">
@@ -55,6 +59,10 @@
    </property>
    <property name="text">
     <string>No</string>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>../images/x.png</normaloff>../images/x.png</iconset>
    </property>
   </widget>
  </widget>

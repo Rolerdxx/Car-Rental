@@ -26,7 +26,7 @@
      <x>50</x>
      <y>190</y>
      <width>971</width>
-     <height>381</height>
+     <height>341</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -86,22 +86,22 @@ QTableView::item:selected {
    </column>
    <column>
     <property name="text">
-     <string>Image</string>
+     <string>picture</string>
     </property>
    </column>
    <column>
     <property name="text">
-     <string>Marque</string>
+     <string>brand</string>
     </property>
    </column>
    <column>
     <property name="text">
-     <string>Modele</string>
+     <string>year</string>
     </property>
    </column>
    <column>
     <property name="text">
-     <string>Carburant</string>
+     <string>fuel</string>
     </property>
    </column>
    <column>
@@ -128,14 +128,24 @@ QTableView::item:selected {
   <widget class="QPushButton" name="reserveButton">
    <property name="geometry">
     <rect>
-     <x>910</x>
+     <x>870</x>
      <y>540</y>
-     <width>75</width>
-     <height>24</height>
+     <width>91</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="text">
     <string>Reserve</string>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>../images/reserver.png</normaloff>../images/reserver.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>30</width>
+     <height>30</height>
+    </size>
    </property>
   </widget>
   <widget class="QFrame" name="frame">
@@ -161,7 +171,7 @@ QTableView::item:selected {
      <rect>
       <x>50</x>
       <y>150</y>
-      <width>971</width>
+      <width>961</width>
       <height>36</height>
      </rect>
     </property>
@@ -325,6 +335,16 @@ width:60px</string>
        <property name="text">
         <string>Filter</string>
        </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../images/search.png</normaloff>../images/search.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>20</width>
+         <height>20</height>
+        </size>
+       </property>
       </widget>
      </item>
     </layout>
@@ -369,7 +389,17 @@ width:60px</string>
         <string notr="true">height:30px;</string>
        </property>
        <property name="text">
-        <string>SignIn</string>
+        <string>        SignIn</string>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../images/2998879.png</normaloff>../images/2998879.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>30</width>
+         <height>30</height>
+        </size>
        </property>
       </widget>
      </item>
@@ -379,7 +409,17 @@ width:60px</string>
         <string notr="true">height:30px;</string>
        </property>
        <property name="text">
-        <string>SignUp</string>
+        <string>        SignUp</string>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../images/icon0.png</normaloff>../images/icon0.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>30</width>
+         <height>30</height>
+        </size>
        </property>
       </widget>
      </item>

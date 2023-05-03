@@ -23,119 +23,175 @@
   <widget class="QLineEdit" name="nomline">
    <property name="geometry">
     <rect>
-     <x>540</x>
-     <y>200</y>
-     <width>201</width>
-     <height>20</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
      <x>470</x>
-     <y>200</y>
-     <width>71</width>
-     <height>16</height>
+     <y>189</y>
+     <width>271</width>
+     <height>31</height>
     </rect>
    </property>
-   <property name="text">
-    <string>Nom</string>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
    </property>
-  </widget>
-  <widget class="QLabel" name="label_2">
-   <property name="geometry">
-    <rect>
-     <x>470</x>
-     <y>230</y>
-     <width>71</width>
-     <height>16</height>
-    </rect>
+   <property name="styleSheet">
+    <string notr="true">background-color:rgba(3, 97, 97, 0.5);
+color: white;
+font-weight:bold;
+border:solid 0px;
+border-bottom:2px solid black;
+height:25px;
+</string>
    </property>
-   <property name="text">
-    <string>Prenom</string>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="placeholderText">
+    <string>FISRT NAME</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="prline">
    <property name="geometry">
     <rect>
-     <x>540</x>
-     <y>230</y>
-     <width>201</width>
-     <height>20</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_3">
-   <property name="geometry">
-    <rect>
      <x>470</x>
-     <y>260</y>
-     <width>71</width>
-     <height>16</height>
+     <y>230</y>
+     <width>271</width>
+     <height>31</height>
     </rect>
    </property>
-   <property name="text">
-    <string>Email</string>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color:rgba(3, 97, 97, 0.5);
+color: white;
+font-weight:bold;
+border:solid 0px;
+border-bottom:2px solid black;
+height:25px;</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="placeholderText">
+    <string>LAST NAME</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="mailine">
    <property name="geometry">
     <rect>
-     <x>540</x>
-     <y>260</y>
-     <width>201</width>
-     <height>20</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_4">
-   <property name="geometry">
-    <rect>
      <x>470</x>
-     <y>290</y>
-     <width>71</width>
-     <height>16</height>
+     <y>270</y>
+     <width>271</width>
+     <height>31</height>
     </rect>
    </property>
-   <property name="text">
-    <string>Mot de passe</string>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color:rgba(3, 97, 97, 0.5);
+color: white;
+font-weight:bold;
+border:solid 0px;
+border-bottom:2px solid black;
+height:25px;</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="placeholderText">
+    <string>EMAIL</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="mdpline">
    <property name="geometry">
     <rect>
-     <x>540</x>
-     <y>290</y>
-     <width>201</width>
-     <height>20</height>
+     <x>470</x>
+     <y>309</y>
+     <width>271</width>
+     <height>31</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color:rgba(3, 97, 97, 0.5);
+color: white;
+font-weight:bold;
+border:solid 0px;
+border-bottom:2px solid black;
+height:25px;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="placeholderText">
+    <string>PASSWORD</string>
    </property>
   </widget>
   <widget class="QPushButton" name="Sibtn">
    <property name="geometry">
     <rect>
-     <x>540</x>
-     <y>340</y>
-     <width>75</width>
-     <height>23</height>
+     <x>490</x>
+     <y>350</y>
+     <width>111</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="text">
-    <string>OK</string>
+    <string>Sign UP</string>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>../images/check.png</normaloff>../images/check.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>30</width>
+     <height>30</height>
+    </size>
    </property>
   </widget>
   <widget class="QPushButton" name="Cnclbtn">
    <property name="geometry">
     <rect>
      <x>630</x>
-     <y>340</y>
-     <width>75</width>
-     <height>23</height>
+     <y>350</y>
+     <width>91</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="text">
     <string>Cancel</string>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>../images/x.png</normaloff>../images/x.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>30</width>
+     <height>30</height>
+    </size>
    </property>
   </widget>
  </widget>

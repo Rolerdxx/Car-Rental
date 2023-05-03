@@ -8,6 +8,7 @@ from Pages.MainPage import MainWindow
 style = open("./styles/QSS/AMOLED.qss", "r")
 stylesheet = style.read()
 style_string = pyqtcss.get_style("dark_orange")
+65
 app = QApplication(sys.argv)
 app.setStyleSheet(stylesheet)
 widget = QtWidgets.QStackedWidget()
