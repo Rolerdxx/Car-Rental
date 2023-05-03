@@ -1,3 +1,4 @@
+from PyQt5.QtGui import QIcon
 from PyQt5.uic import loadUi
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QDialog
@@ -27,7 +28,6 @@ class MainWindow(QDialog):
         self.tableWidget.itemClicked.connect(self.select)
         self.reserveButton.clicked.connect(self.switchpage)
         self.Signupbtnpush.clicked.connect(self.signupfunction)
-
     def loaddata(self):
         self.cars = self.db.getallcars()
         carids = [self.cars[0] for self.cars in self.cars]

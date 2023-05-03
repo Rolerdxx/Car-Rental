@@ -18,7 +18,7 @@ def getsomecars(db, marque, modele, carburant, place, transmission, prix):
     if transmission != "none":
         sql += f" lower(transmission) like '{transmission.lower()}' AND"
     if prix != "":
-        sql += " prixParJour < %s AND"
+        sql += f" prixParJour <= {prix} AND"
     if sql.endswith("AND"):
         sql = sql[:-4]
         print(sql)

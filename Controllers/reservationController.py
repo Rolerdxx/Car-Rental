@@ -3,7 +3,7 @@ def savereservation(db,carid,userid,priceperday,nbrDays):
     print("khdama tahua")
     cursor = db.cursor()
     prix=calculTotalPrice(int(nbrDays),float(priceperday))
-    sql = f"insert into reservation(date,nbrDays,iduser,idvoiture,prix) values(now(),{nbrDays},{userid},{carid},{prix}) "
+    sql = f"insert into reservations(date,nbrDays,iduser,idvoiture,prix) values(now(),{nbrDays},{userid},{carid},{prix}) "
     cursor.execute(sql)
     db.commit()
 def calculTotalPrice(nbrDays,prixperday):
@@ -11,7 +11,7 @@ def calculTotalPrice(nbrDays,prixperday):
 
 def getDayOfResevationEnd(db,carid):
     cursor = db.cursor()
-    sql=f"select nbrDays,DATE_FORMAT(date, '%d-%m-%Y') from reservation where idvoiture={carid}"
+    sql=f"select nbrDays,DATE_FORMAT(date, '%d-%m-%Y') from reservations where idvoiture={carid}"
     cursor.execute(sql)
     table=cursor.fetchall()
     if len(table)!= 0 :
