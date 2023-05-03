@@ -32,7 +32,6 @@ class SignupWindow(QDialog):
         siname = self.nomline.text()
         siprenom = self.prline.text()
         simail = self.mailine.text()
-
         if siname == "":
             msgbox("Erreur", "nom vide")
         elif siprenom == "":
@@ -47,4 +46,5 @@ class SignupWindow(QDialog):
             msgbox("Erreur", "mot de passe doit contenir des miniscules")
         else:
             self.accept()
+
 
