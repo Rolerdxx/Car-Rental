@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>358</width>
-    <height>209</height>
+    <width>520</width>
+    <height>206</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Confirmation</string>
   </property>
   <widget class="QLabel" name="label">
    <property name="geometry">
@@ -34,7 +34,7 @@
   <widget class="QPushButton" name="yes">
    <property name="geometry">
     <rect>
-     <x>160</x>
+     <x>280</x>
      <y>160</y>
      <width>75</width>
      <height>23</height>
@@ -51,7 +51,7 @@
   <widget class="QPushButton" name="no">
    <property name="geometry">
     <rect>
-     <x>250</x>
+     <x>380</x>
      <y>160</y>
      <width>75</width>
      <height>23</height>

@@ -6,6 +6,6 @@ class ResCon(QDialog):
     def __init__(self, total, parent=None):
         super().__init__(parent)
         loadUi("./UI/ReservConfirm.ui", self)
-        self.label.setText("The total price is "+ str(total))
+        self.label.setText("The total price is " + str(total) + " DH Are you sure you want to reserve it?")
         self.no.clicked.connect(self.reject)
         self.yes.clicked.connect(self.accept)

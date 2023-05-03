@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Reserve</string>
   </property>
   <widget class="QLabel" name="label">
    <property name="geometry">
@@ -33,7 +33,7 @@
     <string notr="true">font-weight:bold</string>
    </property>
    <property name="text">
-    <string>Reservation  :</string>
+    <string>How long do you want it (DAYS):</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>

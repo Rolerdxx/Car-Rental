@@ -7,7 +7,7 @@ from Helpers.MessageBox import msgbox
 from Dialogs.LoginPage import LoginDialog
 from Pages.CarPage import CarPage
 from Helpers.ImageLabel import getImageLabel
-from Pages.SignUpPage import SignupWindow
+from Dialogs.SignUpPage import SignupWindow
 import bcrypt
 
 
@@ -132,7 +132,7 @@ class MainWindow(QDialog):
         self.tableWidget.clear()
         self.tableWidget.setRowCount(0)
         self.tableWidget.setHorizontalHeaderLabels(
-            ['Id', 'Image', 'Marque', 'Modele', 'Carburant', 'Places', 'Transmission', 'State', 'Price per day'])
+            ['Id', 'Image', 'Marque', 'Modele', 'Fuel', 'Places', 'Transmission', 'State', 'Price per day'])
 
     def signupfunction(self):
         signupdialog = SignupWindow()
@@ -140,5 +140,4 @@ class MainWindow(QDialog):
         if response:
             data = signupdialog.datagets()
             self.db.Signup(data)
-            self.db.commit()
             msgbox("Account Created", "Your account has been created!")
