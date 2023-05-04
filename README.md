@@ -94,7 +94,7 @@ lorsque l'utilisateur ouvre l'application, il demande toutes les voitures de `my
 
 La fonction qui récupère toutes les voitures de la base de données:
 
-```bash
+```python
 def getallcars(db):
     mycursor = db.cursor()
     mycursor.execute("SELECT id,image,marque,modele,carburant,places,transmission,state,prixParJour FROM voiture")
@@ -103,7 +103,7 @@ def getallcars(db):
 
 La fonction qui affiche les données dans le `TableWidget`, la fonction `getImageLabel` Transforme les octets de l'image en une `QLabel` qui peut être affichée dans le tableau:
 
-```bash
+```python
 def showdata(self, cars):
         for row_number, row_data in enumerate(cars):
             self.tableWidget.insertRow(row_number)
@@ -127,13 +127,13 @@ def showdata(self, cars):
 ### le Remplissage des QComboBox :
 Pour remplir les QComboBox, nous avons décidé d'utiliser les données de ces champs à travers la base de données afin d'afficher uniquement les options disponibles dans notre base de données. Pour cela, nous avons utilisé une requête SQL SELECT DISTINCT pour obtenir toutes les marques présentes dans la base de données en éliminant les doublons.
 
-```bash
+```python
 def getallmarques(db):
     mycursor = db.cursor()
     mycursor.execute("SELECT distinct marque FROM voiture where marque IS NOT NULL")
     return mycursor.fetchall()
 ```
-```bash
+```python
 def loadparametrs(self):
     marque = self.marque
     carburant = self.carburant
@@ -154,13 +154,13 @@ Ce code remplit les options de trois QComboBox à partir des données de la base
 
 Pour le filtrage ona penser a utiliser une condition pour que le filtrage ne travaille que lorsque l’utilisateur choisir une option dans QComboBox ou taper des specifaction 
 
-```bash
+```python
 if marque == "none" and transmission == "none" and carburant == "none" and prix == "" and place == "" and modele == "":
 ```
 
 si non le programme va prendre les donnees saisir par utilisateur est faire le traitement suivant :
 
-```bash
+```python
 def getsomecars(db, marque, modele, carburant, place, transmission, prix):
     mycursor = db.cursor()
     sql = "SELECT id,image,marque,modele,carburant,places,transmission,state,prixParJour FROM voiture WHERE"
@@ -196,7 +196,7 @@ Enfin, la fonction exécute la requête SQL en utilisant la méthode `execute()`
 ![](https://i.imgur.com/lErxsOO.png)
 
 Pour réserver une voiture, sélectionnez-la et cliquez sur le bouton Reserve.
-```bash
+```python
 def switchpage(self):
     if self.currentuser != "Guest":
         if self.selected is not None:
@@ -229,7 +229,7 @@ Apres le système affiche ce QDialog :
 
 ![](https://i.imgur.com/E4W8tMf.png)
 
-```bash
+```python
 def reserveit(self):
     state = str(self.car[7])
     if state == "1":
@@ -247,7 +247,7 @@ def reserveit(self):
 
 ```
 
-```bash
+```python
 def savereservation(db,carid,userid,priceperday,nbrDays):
     cursor = db.cursor()
     prix=calculTotalPrice(int(nbrDays),float(priceperday))
@@ -266,7 +266,7 @@ Avant d'ajouter la réservation, une autre boîte de dialogue est affichée pour
 
 la fonction `savereservation` permet d'ajouter une nouvelle réservation à la base de données en calculant le coût total de la réservation `calculTotalPrice`, en créant une requête SQL et en exécutant cette requête en utilisant un curseur sur la connexion à la base de données.
 
-```bash
+```python
 def reservation(self,carid,userid,priceperday,nbrDays):
     changestate(self.db,carid,True)
     return savereservation(self.db,carid,userid,priceperday,nbrDays)
@@ -275,7 +275,7 @@ def reservation(self,carid,userid,priceperday,nbrDays):
 N'oublions pas le changement de l'état de cette voiture à travers la fonction 'changestate', qui prend en paramètre la variable de la base de données et l'identifiant de la voiture ainsi que l'état à affecter.
 
 
-```bash
+```python
 def changestate(db,carid,number):
     mycursor = db.cursor()
     if number:
@@ -297,7 +297,7 @@ La fonction commence par créer un curseur pour exécuter des requêtes `SQL` su
 
 Avant chaque consultation des voitures, le système vérifie si toutes les réservations sont valides  a l’aide de :
 
-```bash
+```python
 def loaddata(self):
     self.cars = self.db.getallcars()
     carids = [self.cars[0] for self.cars in self.cars]
@@ -310,7 +310,7 @@ def loaddata(self):
 Ce fragment de code permet de mettre à jour l'état de toutes les voitures dans une base de données a l’aide d’une boucle qui va parcourir tous les identifiants des voitures stockées dans `carids`. `checkCarState` est appelée avec l'identifiant de la voiture `car` en tant qu'argument, ce qui permet de mettre à jour l'état de la voiture dans la base de données. pour chaque voiture stockée dans la base de données, puis de récupérer la liste complète des voitures après la mise à jour. 
 
 
-```bash
+```python
 def checkCarState(self,carid):
     dateFN=getDayOfResevationEnd(self.db,carid)
     if dateFN :
@@ -327,7 +327,7 @@ ReservationDelete(self.db,carid)
 La méthode `checkCarState` vérifie si une voiture est réservée ou non en fonction de sa date de fin de réservation `dateFN`. Elle prend en paramètre l'identifiant de la voiture `carid` dont l'état sera vérifié.
 La première étape de la méthode est d'appeler la fonction `getDayOfReservationEnd` pour récupérer la date de fin de réservation de la voiture. 
 
-```bash
+```python
 def getDayOfResevationEnd(db,carid):
     cursor = db.cursor()
     sql=f"select nbrDays,DATE_FORMAT(date, '%d-%m-%Y') from reservations where idvoiture={carid}"
@@ -347,7 +347,7 @@ Si une date de fin de réservation existe, la méthode continue son traitement e
 Si la date de fin de réservation est passée `c'est-à-dire que la date actuelle est supérieure ou égale à la date de fin de réservation`, la méthode appelle la fonction "changestate"qu’il était déjà mentionner dans la partie Reservation pour mettre à jour l'état de la voiture à indisponible `False` ainsi que la méthode appelle la fonction `ReservationDelete`.
 
 
-```bash
+```python
 def ReservationDelete(db,carid) :
     cursor = db.cursor()
     sql = f"DELETE FROM reservations WHERE idvoiture={carid}"
