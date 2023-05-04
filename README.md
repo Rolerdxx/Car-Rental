@@ -63,7 +63,7 @@ When you are in the virtuel environment run the next command to install all the 
   pip install -r requirements.txt
 ```
 
-Import this to database to your mysql server 
+Import this database to your mysql server 
 - [CarRental](https://drive.google.com/file/d/1eN3Br_AKC32_MxGc4jAwT8MxK_w7zsWx/view?usp=sharing)
 
 To run this project, you will need to add the following environment variables to your .env file
