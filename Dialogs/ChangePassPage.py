@@ -26,6 +26,5 @@ class ChangePassDialog(QDialog):
             salt = bcrypt.gensalt()
             hashh = bcrypt.hashpw(bytess, salt)
             res = self.db.changepass(self.email, str(hashh))
-            self.db.commit()
             if res > 0:
                 self.accept()
