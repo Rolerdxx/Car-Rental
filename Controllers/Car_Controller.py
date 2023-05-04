@@ -10,7 +10,7 @@ def getsomecars(db, marque, modele, carburant, place, transmission, prix):
     if marque != "none":
         sql += f" lower(marque) like '{marque.lower()}' AND"
     if modele != "":
-        sql += f" lower(modele) like '{modele.lower()}' AND"
+        sql += f" lower(modele) like '%{modele.lower()}%' AND"
     if carburant != "none":
         sql += f" lower(carburant) like '{carburant.lower()}' AND"
     if place != "":
@@ -21,18 +21,18 @@ def getsomecars(db, marque, modele, carburant, place, transmission, prix):
         sql += f" prixParJour <= {prix} AND"
     if sql.endswith("AND"):
         sql = sql[:-4]
-        print(sql)
     mycursor.execute(sql)
     return mycursor.fetchall()
 
-def changestate(db,carid,number):
+
+def changestate(db, carid, number):
     mycursor = db.cursor()
     if number:
-        sql=f"UPDATE voiture SET state = '0' WHERE id ={carid}"
+        sql = f"UPDATE voiture SET state = '0' WHERE id ={carid}"
         mycursor.execute(sql)
         db.commit()
     else:
-        sql=f"UPDATE voiture SET state = '1' WHERE id ={carid}"
+        sql = f"UPDATE voiture SET state = '1' WHERE id ={carid}"
         mycursor.execute(sql)
         db.commit()
 
@@ -53,4 +53,3 @@ def getallcarburants(db):
     mycursor = db.cursor()
     mycursor.execute("SELECT distinct carburant  FROM voiture where carburant is not NULL")
     return mycursor.fetchall()
-

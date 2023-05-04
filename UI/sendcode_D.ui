@@ -17,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Verification</string>
   </property>
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
@@ -87,7 +87,7 @@ height:25px;</string>
 </string>
    </property>
    <property name="text">
-    <string>Password Reset :</string>
+    <string>We have sent a code to your email:</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>

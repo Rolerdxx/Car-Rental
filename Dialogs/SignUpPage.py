@@ -33,17 +33,17 @@ class SignupWindow(QDialog):
         simail = self.mailine.text()
 
         if siname == "":
-            msgbox("Erreur", "nom vide")
+            msgbox("Error", "last name line is empty")
         elif siprenom == "":
-            msgbox("Erreur", "prenom vide")
+            msgbox("Error", "first name line is empty")
         elif not re.match(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+', simail):
-            msgbox("Erreur", "forme email invalid")
+            msgbox("Error", "email invalid")
         elif len(sipassword) < 8:
-            msgbox("Erreur", "mot de passe moin de 8 car")
+            msgbox("Error", "password has to longer than 7 characters")
         elif sipassword.isdigit():
-            msgbox("Erreur", "mot de passe doit contenir lettres")
+            msgbox("Error", "password should contain letters")
         elif sipassword.isupper():
-            msgbox("Erreur", "mot de passe doit contenir des miniscules")
+            msgbox("Error", "password should contain lower characters")
         else:
             emailveri = CodeSenderDialog(email=simail)
             res = emailveri.exec()

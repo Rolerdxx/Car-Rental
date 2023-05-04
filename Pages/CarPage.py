@@ -1,8 +1,9 @@
 from PyQt5.uic import loadUi
 from PyQt5.QtWidgets import QDialog
 from PyQt5.QtGui import QPixmap
-from Pages.reservation import ReservationDialog
+from Dialogs.reservation import ReservationDialog
 from Dialogs.ReservationConfirm import ResCon
+from Helpers.MessageBox import msgbox
 
 
 class CarPage(QDialog):
@@ -48,4 +49,10 @@ class CarPage(QDialog):
                 rescon = ResCon(float(priceperday)*float(days))
                 res2 = rescon.exec()
                 if res2:
-                    self.main.db.reservation(carid, user, priceperday, days)
+                    res3 = self.main.db.reservation(carid, user, priceperday, days)
+                    if res3 > 0:
+                        self.statelabel.setText("Reserved")
+                        self.statelabel.setStyleSheet("color:rgb(255, 0, 0)")
+                        msgbox("Success", "You have reserved this car")
+        else:
+            msgbox("Error", "The car is already reserved")
