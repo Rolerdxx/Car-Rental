@@ -17,6 +17,7 @@ Table des matières
 
    * [Inroduction](#Introduction)
    * [Fonctionnalités](#Fonctionnalités)
+   * [Technologies](#Technologies)
    * [Auteurs](#Auteurs)
    * [Installation](#Installation)
    * [Diagramme de cas d'utilisation](#Diagramme-de-cas-d'utilisation)
@@ -42,6 +43,17 @@ Table des matières
 ➖ L'utilisateur peut filtrer les voitures par marque, modèle, carburant, lieux, transmission ou prix par jour.
 
 ➖ l'utilisateur peut sélectionner une voiture, aller sur sa page et la réserver.
+
+## Technologies
+
+* **pyqt5:** PyQt est une bibliothèque qui vous permet d'utiliser le framework Qt GUI de Python.
+
+* **mysql:** MySQL est un système de gestion de base de données.
+
+* **SendGrid:** nous permet d'envoyer des e-mails sans avoir à maintenir des serveurs de messagerie.
+
+* **Adobe Photoshop:** utilisé pour créer l'interface de l'application.
+
 ## Auteurs
 
 - [@Bilal Motassim](https://www.github.com/Rolerdxx)
@@ -50,6 +62,18 @@ Table des matières
 
 
 ## Installation
+
+cloner le projet
+
+```bash
+  git clone https://github.com/Rolerdxx/Car-Rental.git
+```
+
+Aller dans le répertoire du projet
+
+```bash
+  cd Car-Rental
+```
 
 Installer l'environnement virtuel python:
 
@@ -220,6 +244,7 @@ def getsomecars(db, marque, modele, carburant, place, transmission, prix):
 * diagramme de sequence
 ![](https://i.imgur.com/NXvD684.png)
 * Image:
+
 ![](https://i.imgur.com/lErxsOO.png)
 
 * Pour réserver une voiture, sélectionnez-la et cliquez sur le bouton Reserve.
@@ -254,7 +279,7 @@ def switchpage(self):
 
 * Ce buton sert a réserver la voiture sélectionnée 
 
-* #### Apres le système affiche ce QDialog :
+* Apres le système affiche ce QDialog :
 
 ![](https://i.imgur.com/E4W8tMf.png)
 
