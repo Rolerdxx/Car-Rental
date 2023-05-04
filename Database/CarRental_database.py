@@ -7,7 +7,9 @@ from Controllers.User_Controller import Signup
 
 from Controllers.Car_Controller import changestate
 
-from Controllers.reservationController import savereservation, getDayOfResevationEnd
+from Controllers.reservationController import savereservation,getDayOfResevationEnd,ReservationDelete
+
+
 
 
 class CarRentalDB:
@@ -51,4 +53,8 @@ class CarRentalDB:
         if dateFN:
             currentDate = datetime.now().date()
             if currentDate >= dateFN:
-                changestate(self.db, carid, False)
+                ReservationDelete(self.db,carid)
+            else:
+                print("car reserved !!!")
+
+

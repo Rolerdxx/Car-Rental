@@ -1,8 +1,7 @@
-from datetime import datetime, timedelta
 
+from datetime import datetime,timedelta
+def savereservation(db,carid,userid,priceperday,nbrDays):
 
-def savereservation(db, carid, userid, priceperday, nbrDays):
-    print("khdama tahua")
     cursor = db.cursor()
     prix = calculTotalPrice(int(nbrDays), float(priceperday))
     sql = f"insert into reservation(date,nbrDays,iduser,idvoiture,prix) values(now(),{nbrDays},{userid},{carid},{prix}) "
@@ -26,3 +25,10 @@ def getDayOfResevationEnd(db, carid):
         dateFN = datetime.strptime(date, '%d-%m-%Y').date()
         newDateFN = dateFN + timedelta(days=nbrDays)
         return newDateFN
+
+def ReservationDelete(db,carid) :
+    cursor = db.cursor()
+    sql = f"DELETE FROM reservations WHERE idvoiture={carid}"
+    cursor.execute(sql)
+    db.commit()
+
