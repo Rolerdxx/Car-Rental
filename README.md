@@ -23,6 +23,9 @@ Table des matières
    * [Diagramme de cas d'utilisation](#Diagramme-de-cas-d'utilisation)
    * [Diagramme de classe](#Diagramme-de-classe)
    * [Consultaion des voitures](#Consultaion-des-voitures)
+   * [Sign Up](#Sign-Up)
+   * [Sign In](#Sign-In)
+   * [Mot de passe oublier](#Mot-de-passe-oublier)
    * [le Remplissage des QComboBox](#le-Remplissage-des-QComboBox)
    * [Filtrage](#Filtrage)
    * [Fonction du Filtrage](#Fonction-du-Filtrage)
@@ -115,29 +118,21 @@ Exécutez l'application:
 
 
     
-## Screenshots
-
-![](https://i.imgur.com/JFBIW9p.png)
-![](https://i.imgur.com/LcRC9MH.png)
-![](https://i.imgur.com/XIzKLz1.png)
-![](https://i.imgur.com/sYJT80R.png)
-
-
 ## Diagramme de cas d'utilisation
 
-![](https://i.imgur.com/Nm6Hx2Y.png)
+  ![](https://i.imgur.com/Nm6Hx2Y.png)
 
 ## Diagramme de classe
 
-![](https://i.imgur.com/JjoBUPf.png)
+  ![](https://i.imgur.com/JjoBUPf.png)
 
 ## Consultaion des voitures
 * Diagramme de sequence:
-![](https://i.imgur.com/HBH13wT.png)
+  ![](https://i.imgur.com/HBH13wT.png)
 
 * lorsque l'utilisateur ouvre l'application, il demande toutes les voitures de `mysql` et les affiche dans un `TableWidget`
 
-![](https://i.imgur.com/JFBIW9p.png)
+  ![](https://i.imgur.com/JFBIW9p.png)
 
 * La fonction qui récupère toutes les voitures de la base de données:
 
@@ -169,10 +164,138 @@ def showdata(self, cars):
         self.tableWidget.verticalHeader().setDefaultSectionSize(80)
 ```
 
+
+
+
+
+
+
+## Sign In
+
+* diagramme de sequence
+
+  ![](https://i.imgur.com/rZecaoq.png)
+
+* Image du fenetre
+
+  ![](https://i.imgur.com/LcRC9MH.png)
+
+
+* l'utilisateur remplit les champs email et mot de passe et clique sur ok, et quand il le fait l'application vérifie si l'email existe
+
+```python
+def login(self):
+        logdialog = LoginDialog(db=self.db)
+        logdialog.setFixedHeight(400)
+        logdialog.setFixedWidth(711)
+        logdialog.setWindowTitle("Login Page")
+        response = logdialog.exec()
+        if response:
+            email = logdialog.getemail()
+            password = logdialog.getpassword()
+            user = self.db.login(email)
+            if user:
+                password = password.encode('utf-8')
+                hashed = user[4]
+                hashed = hashed.encode('utf-8')
+                if bcrypt.checkpw(password, hashed):
+                    self.currentuser = user
+                    self.loginbutton.move(1500, 1500)
+                    self.Signupbtnpush.move(1500, 1500)
+                    txt = "Good Morning " + user[2] + " " + user[1] + "!"
+                    self.label.setText(txt)
+                else:
+                    msgbox("Login", "Password Incorrect")
+            else:
+                msgbox("Login", "Cannot login")
+```
+
+* fonction `self.db.login(email)` renvoie les informations de l'utilisateur
+
+```python
+def login(db, email):
+    mycursor = db.cursor()
+    query = "SELECT * FROM userr WHERE email='" + email + "'"
+    mycursor.execute(query)
+    return mycursor.fetchone()
+```
+
+* si l'utilisateur existe, il compare le mot de passe avec le mot de passe chiffré renvoyé par la fonction `self.db.login()`.
+
+* si le mot de passe est correct, il l'envoie à la page principale avec un message de bienvenue
+
+
+## Mot de passe oublier
+
+* si l'utilisateur oublie son mot de passe, il peut le récupérer à l'aide de son e-mail, il doit d'abord cliquer sur le bouton `forgot password?` dans la page `SignIn`
+
+* Fenêtre d'insertion d'email:
+
+  ![](https://i.imgur.com/8Fsr1NB.png)
+
+* l'utilisateur doit saisir son e-mail, l'application vérifie si l'e-mail existe, et si c'est le cas, elle lui envoie un e-mail avec un code à l'aide de l'API `SendGrid`.
+
+* fonction de mot de passe oublier:
+
+```python
+    def forgotpass(self):
+        emailgetter = EmailGetterDialog()
+        res1 = emailgetter.exec()
+        if res1:
+            email = emailgetter.getemail()
+            self.user = self.db.login(email)
+            if self.user is not None:
+                codesender = CodeSenderDialog(email=email)
+                res = codesender.exec()
+                if res:
+                    if codesender.getcode() == codesender.getcodeentered():
+                        changepass = ChangePassDialog(email=email, db=self.db)
+                        res = changepass.exec()
+                        if res:
+                            msgbox("Success", "Pass changed")
+                        else:
+                            msgbox("Error", "something went wrong")
+            else:
+                msgbox("Error", "User doesnt exist")
+```
+
+* `CodeSender`, cette boîte de dialogue génère un code et lui envoie l'e-mail:
+
+  ![](https://i.imgur.com/8P5PWiF.png)
+
+* `get_random_string` fonction, il génère des lettres aléatoires avec une longueur donnée:
+
+```python
+def get_random_string(length):
+    letters = string.ascii_uppercase
+    result_str = ''.join(random.choice(letters) for i in range(length))
+    return result_str
+```
+
+* `SendEmail` fonction, il envoie un e-mail à l'aide d'une API `sendGrid`, il prend `towho`, `subject`, `message` comme paramètres:
+
+```python
+def SendEmail(towho, subject, message):
+    message = Mail(
+        from_email='carrentalapp123@gmail.com',
+        to_emails=towho,
+        subject=subject,
+        html_content=message)
+    sg = SendGridAPIClient(api_key=os.getenv("emailkey"))
+    sg.send(message)
+```
+
+* si le code est correct, il l'amène à la page `ChangePassPage`:
+
+   ![](https://i.imgur.com/YFC2S0a.png)
+
+
+
+## Sign Up
 ## Filtrage
 ![](https://i.imgur.com/pkr6vzp.png)
 ### le Remplissage des QComboBox
-* Pour remplir les QComboBox, nous avons décidé d'utiliser les données de ces champs à travers la base de données afin d'afficher uniquement les options disponibles dans notre base de données. Pour cela, nous avons utilisé une requête SQL SELECT DISTINCT pour obtenir toutes les marques présentes dans la base de données en éliminant les doublons.
+* Pour remplir les QComboBox, nous avons décidé d'utiliser les données de ces champs à travers la base de données afin d'afficher uniquement les options disponibles dans notre base de données. Pour cela, nous avons utilisé une requête SQL `SELECT DISTINCT` pour obtenir toutes les marques présentes dans la base de données en éliminant les doublons.
 
 ```python
 def getallmarques(db):
@@ -269,7 +392,7 @@ def switchpage(self):
 * Après la vérification, le programme affiche les informations de la voiture sélectionnée.
 
 
-![](https://i.imgur.com/LaTwqFh.png)
+  ![](https://i.imgur.com/LaTwqFh.png)
 
 🏠 BACK BUTTON :
 
@@ -281,7 +404,7 @@ def switchpage(self):
 
 * Apres le système affiche ce QDialog :
 
-![](https://i.imgur.com/E4W8tMf.png)
+  ![](https://i.imgur.com/E4W8tMf.png)
 
 ```python
 def reserveit(self):
@@ -311,7 +434,7 @@ def savereservation(db,carid,userid,priceperday,nbrDays):
 
 ```
 
-![](https://i.imgur.com/2z9MWSc.png)
+  ![](https://i.imgur.com/2z9MWSc.png)
 
 * La première ligne de code extrait la statut du voiture et le stocke dans la variable `state`.
 
@@ -350,7 +473,7 @@ def changestate(db,carid,number):
 
 ## Verifier les Reservation
 * diagramme de sequence:
-![](https://i.imgur.com/dsknqv5.png)
+  ![](https://i.imgur.com/dsknqv5.png)
 
 * Avant chaque consultation des voitures, le système vérifie si toutes les réservations sont valides  a l’aide de :
 
@@ -418,8 +541,3 @@ def ReservationDelete(db,carid) :
 * La fonction ReservationDelete  supprime la ligne de la  `reservation` qui est l'identifiant de voiture donné en utilisant une instruction `SQL DELETE`.
 
 * Si la date de fin de réservation n'est pas encore passée, la méthode affiche simplement un message indiquant que la voiture est réservée.
-
-
-
-
-
