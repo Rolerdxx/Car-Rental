@@ -1,6 +1,7 @@
 
 # Application de location de voitures
 
+## Introduction
 
 Nous visons à développer une application de gestion de location de voiture.
 
@@ -9,6 +10,24 @@ Nous visons à développer une application de gestion de location de voiture.
 ✔ Nous stockons les informations sur la voiture et l'utilisateur dans une base de données relationnelle.
 
 ✔ Nous avons créé une interface utilisateur conviviale pour faciliter l'utilisation de l'application.
+
+
+Table of contents
+=================
+
+
+   * [Inroduction](#Introduction)
+   * [Fonctionnalités](#Fonctionnalités)
+   * [Auteurs](#Auteurs)
+   * [Installation](#Installation)
+   * [Diagramme de cas d'utilisation](#Diagramme-de-cas-d'utilisation)
+   * [Diagramme de classe](#Diagramme-de-classe)
+   * [Consultaion des voitures](#Consultaion-des-voitures)
+   * [le Remplissage des QComboBox](#le-Remplissage-des-QComboBox-:)
+   * [Le Filtrage](#Le-Filtrage-:)
+   * [Filtrage](#Filtrage)
+   * [Reservation](#Reservation)
+   * [Verifier les Reservation](#Verifier-les-Reservation-:)
 
 
 ## Fonctionnalités
@@ -73,7 +92,12 @@ Exécutez l'application:
 
 
     
+## Screenshots
 
+![](https://i.imgur.com/JFBIW9p.png)
+![](https://i.imgur.com/LcRC9MH.png)
+![](https://i.imgur.com/XIzKLz1.png)
+![](https://i.imgur.com/sYJT80R.png)
 
 
 ## Diagramme de cas d'utilisation
@@ -194,7 +218,6 @@ Enfin, la fonction exécute la requête SQL en utilisant la méthode `execute()`
 ![](https://i.imgur.com/NXvD684.png)
 ### Image:
 ![](https://i.imgur.com/lErxsOO.png)
-
 Pour réserver une voiture, sélectionnez-la et cliquez sur le bouton Reserve.
 ```python
 def switchpage(self):
@@ -357,15 +380,6 @@ def ReservationDelete(db,carid) :
 
 La fonction ReservationDelete  supprime la ligne de la  `reservation` qui est l'identifiant de voiture donné en utilisant une instruction `SQL DELETE`.
 Si la date de fin de réservation n'est pas encore passée, la méthode affiche simplement un message indiquant que la voiture est réservée.
-
-
-
-## Screenshots
-
-![](https://i.imgur.com/JFBIW9p.png)
-![](https://i.imgur.com/LcRC9MH.png)
-![](https://i.imgur.com/XIzKLz1.png)
-![](https://i.imgur.com/sYJT80R.png)
 
 
 
