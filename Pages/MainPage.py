@@ -1,4 +1,3 @@
-from PyQt5.QtGui import QIcon
 from PyQt5.uic import loadUi
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QDialog
@@ -8,7 +7,7 @@ from Dialogs.LoginPage import LoginDialog
 from Pages.CarPage import CarPage
 from Helpers.ImageLabel import getImageLabel
 from Dialogs.SignUpPage import SignupWindow
-import bcrypt
+from Helpers.Encrypt import CheckPass
 
 
 class MainWindow(QDialog):
@@ -111,13 +110,8 @@ class MainWindow(QDialog):
             email = logdialog.getemail()
             password = logdialog.getpassword()
             user = self.db.login(email)
-            global userid
-            userid = user[0]
             if user:
-                password = password.encode('utf-8')
-                hashed = user[4]
-                hashed = hashed.encode('utf-8')
-                if bcrypt.checkpw(password, hashed):
+                if CheckPass(password, user[4]):
                     self.currentuser = user
                     self.loginbutton.move(1500, 1500)
                     self.Signupbtnpush.move(1500, 1500)

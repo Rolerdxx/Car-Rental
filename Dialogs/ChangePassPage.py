@@ -1,7 +1,7 @@
 from PyQt5.uic import loadUi
 from PyQt5.QtWidgets import QDialog, QLineEdit
 from Helpers.MessageBox import msgbox
-import bcrypt
+from Helpers.Encrypt import EncryptPass
 
 
 class ChangePassDialog(QDialog):
@@ -22,9 +22,7 @@ class ChangePassDialog(QDialog):
         elif len(password) < 7:
             msgbox("Error", "Password has to be at least 8 chars long")
         else:
-            bytess = password.encode('utf-8')
-            salt = bcrypt.gensalt()
-            hashh = bcrypt.hashpw(bytess, salt)
-            res = self.db.changepass(self.email, str(hashh))
+            hashh = EncryptPass(password)
+            res = self.db.changepass(self.email, hashh)
             if res > 0:
                 self.accept()

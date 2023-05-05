@@ -7,7 +7,7 @@ def login(db, email):
 
 def changepassword(db, email, newpass):
     cursor = db.cursor()
-    query = "UPDATE userr SET passwordEn = '" + newpass[2:-1] + "' WHERE email = '" + email + "'"
+    query = "UPDATE userr SET passwordEn = '" + newpass + "' WHERE email = '" + email + "'"
 
     try:
         cursor.execute(query)
