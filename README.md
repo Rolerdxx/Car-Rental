@@ -185,7 +185,7 @@ def showdata(self, cars):
 * l'utilisateur remplit les champs email et mot de passe et clique sur ok, et quand il le fait l'application vérifie si l'email existe
 
 ```python
-def login(self):
+    def login(self):
         logdialog = LoginDialog(db=self.db)
         logdialog.setFixedHeight(400)
         logdialog.setFixedWidth(711)
@@ -196,10 +196,7 @@ def login(self):
             password = logdialog.getpassword()
             user = self.db.login(email)
             if user:
-                password = password.encode('utf-8')
-                hashed = user[4]
-                hashed = hashed.encode('utf-8')
-                if bcrypt.checkpw(password, hashed):
+                if CheckPass(password, user[4]):
                     self.currentuser = user
                     self.loginbutton.move(1500, 1500)
                     self.Signupbtnpush.move(1500, 1500)
