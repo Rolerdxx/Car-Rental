@@ -128,6 +128,7 @@ Exécutez l'application:
 
 ## Consultaion des voitures
 * Diagramme de sequence:
+
   ![](https://i.imgur.com/HBH13wT.png)
 
 * lorsque l'utilisateur ouvre l'application, il demande toutes les voitures de `mysql` et les affiche dans un `TableWidget`
@@ -227,6 +228,10 @@ def login(db, email):
 
 ## Mot de passe oublier
 
+* Diagramme de sequence:
+
+  ![](https://i.imgur.com/XgSmSf5.png)
+
 * si l'utilisateur oublie son mot de passe, il peut le récupérer à l'aide de son e-mail, il doit d'abord cliquer sur le bouton `forgot password?` dans la page `SignIn`
 
 * Fenêtre d'insertion d'email:
@@ -292,6 +297,95 @@ def SendEmail(towho, subject, message):
 
 
 ## Sign Up
+
+* Diagramme de sequence:
+
+  ![](https://i.imgur.com/9PEabt4.png)
+
+* Fenetre `SignUp`:
+
+  ![](https://i.imgur.com/U1U6ylC.png)
+
+* En tant que groupe, nous avons développé une interface graphique d'inscription en utilisant `PyQt5` pour notre projet informatique. Le code présenté est une classe `SignupWindow` qui hérite de la classe `QDialog` de la bibliothèque `PyQt`. Cette classe est utilisée pour créer une fenêtre de dialogue de formulaire d'inscription à une application. Le constructeur `__init__` de la classe charge l'interface utilisateur de la fenêtre de dialogue à partir d'un fichier .ui en utilisant la méthode `loadUi()` de la bibliothèque `PyQt`. Il définit également le mode d'écho pour le champ de mot de passe de l'utilisateur en utilisant la méthode `setEchoMode()`. Les boutons de la fenêtre de dialogue sont connectés à des fonctions en utilisant la méthode `connect()`. Lorsque le bouton "S'inscrire" est cliqué, la fonction `passwordvalidation()` est appelée pour vérifier si les informations saisies par l'utilisateur sont valides. Si les informations sont valides, un message de réussite est affiché. Si les informations sont invalides, un message d'erreur est affiché. Le bouton "Annuler" est connecté à la méthode `reject()` pour fermer la fenêtre de dialogue sans enregistrer les informations saisies. Dans l'ensemble, cette classe est un élément clé de la fonctionnalité d'inscription de l'application et permet à l'utilisateur de saisir ses informations de manière sécurisée et de vérifier si elles sont valides avant de les enregistrer dans la base de données.
+
+```python
+class SignupWindow(QDialog):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        loadUi("./UI/Singup.ui", self)
+        self.mdpline.setEchoMode(QtWidgets.QLineEdit.Password)
+        self.Sibtn.clicked.connect(self.passwordvalidation)
+        self.Cnclbtn.clicked.connect(self.reject)
+```
+
+* Nous avons une méthode nommée `datagets` qui récupère les données saisies par l'utilisateur dans les champs nommés `nomline`, `prline`, `mailine` et `mdpline` du formulaire. Les données saisies dans le champ `mdpline` sont d'abord encodées en bytes et le module bcrypt est utilisé pour générer un hash de mot de passe en utilisant une clé de hachage de sel. Les données sont stockées dans une liste et renvoyées.
+
+
+```python
+    def datagets(self):
+        data = []
+        data.append(self.nomline.text())
+        data.append(self.prline.text())
+        data.append(self.mailine.text())
+        hashh = EncryptPass(self.mdpline.text())
+        data.append(hashh)
+        return data
+```
+
+* Nous avons mis en place une fonction de validation de mot de passe dans notre application `PyQt`. Cette fonction vérifie la validité de la saisie de l'utilisateur avant de procéder à l'inscription. Tout d'abord, nous vérifions si l'utilisateur a correctement saisi son nom, son prénom, son adresse e-mail et son mot de passe. Ensuite, nous vérifions si l'adresse e-mail saisie par l'utilisateur est valide en utilisant des expressions régulières. Le mot de passe saisi par l'utilisateur doit comporter au moins 8 caractères et contenir des lettres et des caractères en minuscules. Si toutes les conditions sont remplies, nous procédons à la vérification de l'e-mail en envoyant un code de vérification. Nous appelons une boîte de dialogue nommée `CodeSenderDialog`, qui envoie un code de vérification à l'adresse e-mail de l'utilisateur. Une fois que l'utilisateur saisit le code, nous le comparons à celui généré par notre système. Si les codes correspondent, le processus d'inscription se poursuit et l'utilisateur est ajouté à la base de données. Sinon, un message d'erreur est affiché et le processus d'inscription est interrompu.
+
+
+
+```python
+    def passwordvalidation(self):
+        sipassword = self.mdpline.text()
+        siname = self.nomline.text()
+        siprenom = self.prline.text()
+        simail = self.mailine.text()
+
+        if siname == "":
+            msgbox("Error", "last name line is empty")
+        elif siprenom == "":
+            msgbox("Error", "first name line is empty")
+        elif not re.match(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+', simail):
+            msgbox("Error", "email invalid")
+        elif len(sipassword) < 8:
+            msgbox("Error", "password has to longer than 7 characters")
+        elif sipassword.isdigit():
+            msgbox("Error", "password should contain letters")
+        elif sipassword.isupper():
+            msgbox("Error", "password should contain lower characters")
+        else:
+            emailveri = CodeSenderDialog(email=simail)
+            res = emailveri.exec()
+            if res:
+                if emailveri.getcode() == emailveri.getcodeentered():
+                    self.accept()
+                else:
+                    msgbox("Error", "Wrong code")
+            else:
+                self.reject()
+```
+
+* la fonction `SignUp` qui stocke les données dans la base de données:
+
+```python
+def Signup(db, data):
+    cursor = db.cursor()
+    query = "INSERT INTO userr (nom,prenom,email,passwordEn) VALUES(%s, %s, %s, %s)"
+    cursor.execute(query, data)
+    db.commit()
+    return cursor.rowcount
+```
+
+* `CodeSenderDialog`:
+
+  ![](https://i.imgur.com/7AmoFnQ.png)
+
+
+* Message d'erreur:
+
+  ![](https://i.imgur.com/CnUhkR1.png)
 ## Filtrage
 ![](https://i.imgur.com/pkr6vzp.png)
 ### le Remplissage des QComboBox
@@ -364,8 +458,10 @@ def getsomecars(db, marque, modele, carburant, place, transmission, prix):
 * Enfin, la fonction exécute la requête SQL en utilisant la méthode `execute()` sur le curseur, puis retourne tous les résultats de la requête avec `fetchall()`. 
 
 ##  Reservation
-* diagramme de sequence
+* diagramme de sequence:
+
 ![](https://i.imgur.com/NXvD684.png)
+
 * Image:
 
 ![](https://i.imgur.com/lErxsOO.png)
