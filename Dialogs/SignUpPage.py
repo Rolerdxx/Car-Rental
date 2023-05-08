@@ -1,10 +1,10 @@
 import re
-import bcrypt
 from PyQt5.uic import loadUi
 from PyQt5.QtWidgets import QDialog
 from PyQt5 import QtWidgets
 from Helpers.MessageBox import msgbox
 from Dialogs.CodeSender import CodeSenderDialog
+from Helpers.Encrypt import EncryptPass
 
 
 class SignupWindow(QDialog):
@@ -20,10 +20,8 @@ class SignupWindow(QDialog):
         data.append(self.nomline.text())
         data.append(self.prline.text())
         data.append(self.mailine.text())
-        bytess = self.mdpline.text().encode('utf-8')
-        salt = bcrypt.gensalt()
-        hashh = bcrypt.hashpw(bytess, salt)
-        data.append(str(hashh)[2:-1])
+        hashh = EncryptPass(self.mdpline.text())
+        data.append(hashh)
         return data
 
     def passwordvalidation(self):

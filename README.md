@@ -23,6 +23,9 @@ Table des matières
    * [Diagramme de cas d'utilisation](#Diagramme-de-cas-d'utilisation)
    * [Diagramme de classe](#Diagramme-de-classe)
    * [Consultaion des voitures](#Consultaion-des-voitures)
+   * [Sign Up](#Sign-Up)
+   * [Sign In](#Sign-In)
+   * [Mot de passe oublier](#Mot-de-passe-oublier)
    * [le Remplissage des QComboBox](#le-Remplissage-des-QComboBox)
    * [Filtrage](#Filtrage)
    * [Fonction du Filtrage](#Fonction-du-Filtrage)
@@ -113,31 +116,29 @@ Exécutez l'application:
   py main.py
 ```
 
+Login test:
+
+* **email**: c
+* **password**: d
+
 
     
-## Screenshots
-
-![](https://i.imgur.com/JFBIW9p.png)
-![](https://i.imgur.com/LcRC9MH.png)
-![](https://i.imgur.com/XIzKLz1.png)
-![](https://i.imgur.com/sYJT80R.png)
-
-
 ## Diagramme de cas d'utilisation
 
-![](https://i.imgur.com/Nm6Hx2Y.png)
+  ![](https://i.imgur.com/Nm6Hx2Y.png)
 
 ## Diagramme de classe
 
-![](https://i.imgur.com/JjoBUPf.png)
+  ![](https://i.imgur.com/JjoBUPf.png)
 
 ## Consultaion des voitures
 * Diagramme de sequence:
-![](https://i.imgur.com/HBH13wT.png)
+
+  ![](https://i.imgur.com/HBH13wT.png)
 
 * lorsque l'utilisateur ouvre l'application, il demande toutes les voitures de `mysql` et les affiche dans un `TableWidget`
 
-![](https://i.imgur.com/JFBIW9p.png)
+  ![](https://i.imgur.com/JFBIW9p.png)
 
 * La fonction qui récupère toutes les voitures de la base de données:
 
@@ -169,10 +170,228 @@ def showdata(self, cars):
         self.tableWidget.verticalHeader().setDefaultSectionSize(80)
 ```
 
+
+
+
+
+
+
+## Sign In
+
+* diagramme de sequence
+
+  ![](https://i.imgur.com/rZecaoq.png)
+
+* Image du fenetre
+
+  ![](https://i.imgur.com/LcRC9MH.png)
+
+
+* l'utilisateur remplit les champs email et mot de passe et clique sur ok, et quand il le fait l'application vérifie si l'email existe
+
+```python
+    def login(self):
+        logdialog = LoginDialog(db=self.db)
+        logdialog.setFixedHeight(400)
+        logdialog.setFixedWidth(711)
+        logdialog.setWindowTitle("Login Page")
+        response = logdialog.exec()
+        if response:
+            email = logdialog.getemail()
+            password = logdialog.getpassword()
+            user = self.db.login(email)
+            if user:
+                if CheckPass(password, user[4]):
+                    self.currentuser = user
+                    self.loginbutton.move(1500, 1500)
+                    self.Signupbtnpush.move(1500, 1500)
+                    txt = "Good Morning " + user[2] + " " + user[1] + "!"
+                    self.label.setText(txt)
+                else:
+                    msgbox("Login", "Password Incorrect")
+            else:
+                msgbox("Login", "Cannot login")
+```
+
+* fonction `self.db.login(email)` renvoie les informations de l'utilisateur
+
+```python
+def login(db, email):
+    mycursor = db.cursor()
+    query = "SELECT * FROM userr WHERE email='" + email + "'"
+    mycursor.execute(query)
+    return mycursor.fetchone()
+```
+
+* si l'utilisateur existe, il compare le mot de passe avec le mot de passe chiffré renvoyé par la fonction `self.db.login()`.
+
+* si le mot de passe est correct, il l'envoie à la page principale avec un message de bienvenue
+
+
+## Mot de passe oublier
+
+* Diagramme de sequence:
+
+  ![](https://i.imgur.com/XgSmSf5.png)
+
+* si l'utilisateur oublie son mot de passe, il peut le récupérer à l'aide de son e-mail, il doit d'abord cliquer sur le bouton `forgot password?` dans la page `SignIn`
+
+* Fenêtre d'insertion d'email:
+
+  ![](https://i.imgur.com/8Fsr1NB.png)
+
+* l'utilisateur doit saisir son e-mail, l'application vérifie si l'e-mail existe, et si c'est le cas, elle lui envoie un e-mail avec un code à l'aide de l'API `SendGrid`.
+
+* fonction de mot de passe oublier:
+
+```python
+    def forgotpass(self):
+        emailgetter = EmailGetterDialog()
+        res1 = emailgetter.exec()
+        if res1:
+            email = emailgetter.getemail()
+            self.user = self.db.login(email)
+            if self.user is not None:
+                codesender = CodeSenderDialog(email=email)
+                res = codesender.exec()
+                if res:
+                    if codesender.getcode() == codesender.getcodeentered():
+                        changepass = ChangePassDialog(email=email, db=self.db)
+                        res = changepass.exec()
+                        if res:
+                            msgbox("Success", "Pass changed")
+                        else:
+                            msgbox("Error", "something went wrong")
+            else:
+                msgbox("Error", "User doesnt exist")
+```
+
+* `CodeSender`, cette boîte de dialogue génère un code et lui envoie l'e-mail:
+
+  ![](https://i.imgur.com/8P5PWiF.png)
+
+* `get_random_string` fonction, il génère des lettres aléatoires avec une longueur donnée:
+
+```python
+def get_random_string(length):
+    letters = string.ascii_uppercase
+    result_str = ''.join(random.choice(letters) for i in range(length))
+    return result_str
+```
+
+* `SendEmail` fonction, il envoie un e-mail à l'aide d'une API `sendGrid`, il prend `towho`, `subject`, `message` comme paramètres:
+
+```python
+def SendEmail(towho, subject, message):
+    message = Mail(
+        from_email='carrentalapp123@gmail.com',
+        to_emails=towho,
+        subject=subject,
+        html_content=message)
+    sg = SendGridAPIClient(api_key=os.getenv("emailkey"))
+    sg.send(message)
+```
+
+* si le code est correct, il l'amène à la page `ChangePassPage`:
+
+   ![](https://i.imgur.com/YFC2S0a.png)
+
+
+
+## Sign Up
+
+* Diagramme de sequence:
+
+  ![](https://i.imgur.com/9PEabt4.png)
+
+* Fenetre `SignUp`:
+
+  ![](https://i.imgur.com/U1U6ylC.png)
+
+* En tant que groupe, nous avons développé une interface graphique d'inscription en utilisant `PyQt5` pour notre projet informatique. Le code présenté est une classe `SignupWindow` qui hérite de la classe `QDialog` de la bibliothèque `PyQt`. Cette classe est utilisée pour créer une fenêtre de dialogue de formulaire d'inscription à une application. Le constructeur `__init__` de la classe charge l'interface utilisateur de la fenêtre de dialogue à partir d'un fichier .ui en utilisant la méthode `loadUi()` de la bibliothèque `PyQt`. Il définit également le mode d'écho pour le champ de mot de passe de l'utilisateur en utilisant la méthode `setEchoMode()`. Les boutons de la fenêtre de dialogue sont connectés à des fonctions en utilisant la méthode `connect()`. Lorsque le bouton "S'inscrire" est cliqué, la fonction `passwordvalidation()` est appelée pour vérifier si les informations saisies par l'utilisateur sont valides. Si les informations sont valides, un message de réussite est affiché. Si les informations sont invalides, un message d'erreur est affiché. Le bouton "Annuler" est connecté à la méthode `reject()` pour fermer la fenêtre de dialogue sans enregistrer les informations saisies. Dans l'ensemble, cette classe est un élément clé de la fonctionnalité d'inscription de l'application et permet à l'utilisateur de saisir ses informations de manière sécurisée et de vérifier si elles sont valides avant de les enregistrer dans la base de données.
+
+```python
+class SignupWindow(QDialog):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        loadUi("./UI/Singup.ui", self)
+        self.mdpline.setEchoMode(QtWidgets.QLineEdit.Password)
+        self.Sibtn.clicked.connect(self.passwordvalidation)
+        self.Cnclbtn.clicked.connect(self.reject)
+```
+
+* Nous avons une méthode nommée `datagets` qui récupère les données saisies par l'utilisateur dans les champs nommés `nomline`, `prline`, `mailine` et `mdpline` du formulaire. Les données saisies dans le champ `mdpline` sont d'abord encodées en bytes et le module bcrypt est utilisé pour générer un hash de mot de passe en utilisant une clé de hachage de sel. Les données sont stockées dans une liste et renvoyées.
+
+
+```python
+    def datagets(self):
+        data = []
+        data.append(self.nomline.text())
+        data.append(self.prline.text())
+        data.append(self.mailine.text())
+        hashh = EncryptPass(self.mdpline.text())
+        data.append(hashh)
+        return data
+```
+
+* Nous avons mis en place une fonction de validation de mot de passe dans notre application `PyQt`. Cette fonction vérifie la validité de la saisie de l'utilisateur avant de procéder à l'inscription. Tout d'abord, nous vérifions si l'utilisateur a correctement saisi son nom, son prénom, son adresse e-mail et son mot de passe. Ensuite, nous vérifions si l'adresse e-mail saisie par l'utilisateur est valide en utilisant des expressions régulières. Le mot de passe saisi par l'utilisateur doit comporter au moins 8 caractères et contenir des lettres et des caractères en minuscules. Si toutes les conditions sont remplies, nous procédons à la vérification de l'e-mail en envoyant un code de vérification. Nous appelons une boîte de dialogue nommée `CodeSenderDialog`, qui envoie un code de vérification à l'adresse e-mail de l'utilisateur. Une fois que l'utilisateur saisit le code, nous le comparons à celui généré par notre système. Si les codes correspondent, le processus d'inscription se poursuit et l'utilisateur est ajouté à la base de données. Sinon, un message d'erreur est affiché et le processus d'inscription est interrompu.
+
+
+
+```python
+    def passwordvalidation(self):
+        sipassword = self.mdpline.text()
+        siname = self.nomline.text()
+        siprenom = self.prline.text()
+        simail = self.mailine.text()
+
+        if siname == "":
+            msgbox("Error", "last name line is empty")
+        elif siprenom == "":
+            msgbox("Error", "first name line is empty")
+        elif not re.match(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+', simail):
+            msgbox("Error", "email invalid")
+        elif len(sipassword) < 8:
+            msgbox("Error", "password has to longer than 7 characters")
+        elif sipassword.isdigit():
+            msgbox("Error", "password should contain letters")
+        elif sipassword.isupper():
+            msgbox("Error", "password should contain lower characters")
+        else:
+            emailveri = CodeSenderDialog(email=simail)
+            res = emailveri.exec()
+            if res:
+                if emailveri.getcode() == emailveri.getcodeentered():
+                    self.accept()
+                else:
+                    msgbox("Error", "Wrong code")
+            else:
+                self.reject()
+```
+
+* la fonction `SignUp` qui stocke les données dans la base de données:
+
+```python
+def Signup(db, data):
+    cursor = db.cursor()
+    query = "INSERT INTO userr (nom,prenom,email,passwordEn) VALUES(%s, %s, %s, %s)"
+    cursor.execute(query, data)
+    db.commit()
+    return cursor.rowcount
+```
+
+* `CodeSenderDialog`:
+
+   ![](https://i.imgur.com/7AmoFnQ.png)
+
+
+* Message d'erreur:
+
+  ![](https://i.imgur.com/CnUhkR1.png)
 ## Filtrage
 ![](https://i.imgur.com/pkr6vzp.png)
 ### le Remplissage des QComboBox
-* Pour remplir les QComboBox, nous avons décidé d'utiliser les données de ces champs à travers la base de données afin d'afficher uniquement les options disponibles dans notre base de données. Pour cela, nous avons utilisé une requête SQL SELECT DISTINCT pour obtenir toutes les marques présentes dans la base de données en éliminant les doublons.
+* Pour remplir les QComboBox, nous avons décidé d'utiliser les données de ces champs à travers la base de données afin d'afficher uniquement les options disponibles dans notre base de données. Pour cela, nous avons utilisé une requête SQL `SELECT DISTINCT` pour obtenir toutes les marques présentes dans la base de données en éliminant les doublons.
 
 ```python
 def getallmarques(db):
@@ -241,8 +460,10 @@ def getsomecars(db, marque, modele, carburant, place, transmission, prix):
 * Enfin, la fonction exécute la requête SQL en utilisant la méthode `execute()` sur le curseur, puis retourne tous les résultats de la requête avec `fetchall()`. 
 
 ##  Reservation
-* diagramme de sequence
+* diagramme de sequence:
+
 ![](https://i.imgur.com/NXvD684.png)
+
 * Image:
 
 ![](https://i.imgur.com/lErxsOO.png)
@@ -266,10 +487,10 @@ def switchpage(self):
 
 * Le cas où un utilisateur n'est pas connecté `self.currentuser == "Guest"` est géré avec un message d'erreur indiquant qu'il doit se connecter pour continuer. Le cas où une voiture n'est pas sélectionnée `self.selected is None` est également géré avec un message d'erreur indiquant qu'une voiture doit être sélectionnée pour continuer.
 
-* Après la vérification, le programme affiche les informations de la voiture sélectionnée.
+* Après la verification, le programme affiche les informations de la voiture sélectionnée.
 
 
-![](https://i.imgur.com/LaTwqFh.png)
+  ![](https://i.imgur.com/LaTwqFh.png)
 
 🏠 BACK BUTTON :
 
@@ -281,7 +502,7 @@ def switchpage(self):
 
 * Apres le système affiche ce QDialog :
 
-![](https://i.imgur.com/E4W8tMf.png)
+  ![](https://i.imgur.com/E4W8tMf.png)
 
 ```python
 def reserveit(self):
@@ -311,7 +532,7 @@ def savereservation(db,carid,userid,priceperday,nbrDays):
 
 ```
 
-![](https://i.imgur.com/2z9MWSc.png)
+  ![](https://i.imgur.com/2z9MWSc.png)
 
 * La première ligne de code extrait la statut du voiture et le stocke dans la variable `state`.
 
@@ -350,7 +571,7 @@ def changestate(db,carid,number):
 
 ## Verifier les Reservation
 * diagramme de sequence:
-![](https://i.imgur.com/dsknqv5.png)
+  ![](https://i.imgur.com/dsknqv5.png)
 
 * Avant chaque consultation des voitures, le système vérifie si toutes les réservations sont valides  a l’aide de :
 
@@ -418,8 +639,3 @@ def ReservationDelete(db,carid) :
 * La fonction ReservationDelete  supprime la ligne de la  `reservation` qui est l'identifiant de voiture donné en utilisant une instruction `SQL DELETE`.
 
 * Si la date de fin de réservation n'est pas encore passée, la méthode affiche simplement un message indiquant que la voiture est réservée.
-
-
-
-
-
