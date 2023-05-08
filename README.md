@@ -116,6 +116,11 @@ Exécutez l'application:
   py main.py
 ```
 
+Login test:
+
+* **email**: c
+* **password**: d
+
 
     
 ## Diagramme de cas d'utilisation
