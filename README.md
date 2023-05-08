@@ -302,7 +302,7 @@ def SendEmail(towho, subject, message):
 
 * Diagramme de sequence:
 
-  ![](https://i.imgur.com/9PEabt4.png)
+  ![](https://i.imgur.com/n1aOviL.png)
 
 * Fenetre `SignUp`:
 
