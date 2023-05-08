@@ -29,7 +29,6 @@ class SignupWindow(QDialog):
         siname = self.nomline.text()
         siprenom = self.prline.text()
         simail = self.mailine.text()
-
         if siname == "":
             msgbox("Error", "last name line is empty")
         elif siprenom == "":
@@ -52,4 +51,5 @@ class SignupWindow(QDialog):
                     msgbox("Error", "Wrong code")
             else:
                 self.reject()
+
 
