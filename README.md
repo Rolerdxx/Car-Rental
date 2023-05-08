@@ -51,7 +51,7 @@ Table des matières
 
 * **pyqt5:** PyQt est une bibliothèque qui vous permet d'utiliser le framework Qt GUI de Python.
 
-* **mysql:** MySQL est un système de gestion de base de données.
+* **mysql:** MySQL est un systeme de gestion de base de données.
 
 * **SendGrid:** nous permet d'envoyer des e-mails sans avoir à maintenir des serveurs de messagerie.
 
