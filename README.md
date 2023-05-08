@@ -382,7 +382,7 @@ def Signup(db, data):
 
 * `CodeSenderDialog`:
 
-  ![](https://i.imgur.com/7AmoFnQ.png)
+   ![](https://i.imgur.com/7AmoFnQ.png)
 
 
 * Message d'erreur:
@@ -487,7 +487,7 @@ def switchpage(self):
 
 * Le cas où un utilisateur n'est pas connecté `self.currentuser == "Guest"` est géré avec un message d'erreur indiquant qu'il doit se connecter pour continuer. Le cas où une voiture n'est pas sélectionnée `self.selected is None` est également géré avec un message d'erreur indiquant qu'une voiture doit être sélectionnée pour continuer.
 
-* Après la vérification, le programme affiche les informations de la voiture sélectionnée.
+* Après la verification, le programme affiche les informations de la voiture sélectionnée.
 
 
   ![](https://i.imgur.com/LaTwqFh.png)
